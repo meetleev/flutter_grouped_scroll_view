@@ -152,4 +152,3 @@ GroupedScrollView.list(
         ),
       )
 ```
-## Additional information
