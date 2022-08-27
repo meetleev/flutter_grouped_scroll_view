@@ -6,7 +6,8 @@ class GroupedListViewTestPage extends StatefulWidget {
   const GroupedListViewTestPage({super.key});
 
   @override
-  State<GroupedListViewTestPage> createState() => _GroupedListViewTestPageState();
+  State<GroupedListViewTestPage> createState() =>
+      _GroupedListViewTestPageState();
 }
 
 class _GroupedListViewTestPageState extends State<GroupedListViewTestPage> {
@@ -17,7 +18,8 @@ class _GroupedListViewTestPageState extends State<GroupedListViewTestPage> {
         itemGrouper: (Person person) {
           return person.birthYear;
         },
-        stickyHeaderBuilder: (BuildContext context, int year, int idx) => Container(
+        stickyHeaderBuilder: (BuildContext context, int year, int idx) =>
+            Container(
           color: Colors.white,
           padding: const EdgeInsets.all(8),
           constraints: const BoxConstraints.tightFor(height: 30),

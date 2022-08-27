@@ -7,6 +7,7 @@ int _kDefaultSemanticIndexCallback(Widget _, int localIndex) => localIndex;
 
 @immutable
 class GroupedScrollView<T, H> extends StatelessWidget {
+  /// data
   final List<T> data;
 
   /// Header
@@ -21,42 +22,80 @@ class GroupedScrollView<T, H> extends StatelessWidget {
   /// Optional [Function] that helps sort the groups by comparing the [T] items.
   final Comparator<T>? itemsSorter;
 
-  /// GridView
-  final Widget Function(BuildContext context, H header, int idx) stickyHeaderBuilder;
+  /// stickyHeaderBuilder
+  final Widget Function(BuildContext context, H header, int idx)
+      stickyHeaderBuilder;
+
+  /// itemBuilder
   final Widget Function(BuildContext context, T item) itemBuilder;
+
+  /// itemGrouper
   final H Function(T item) itemGrouper;
+
+  /// The delegate that controls the size and position of the children.
   final SliverGridDelegate? gridDelegate;
 
+  /// findChildIndexCallback for [SliverChildBuilderDelegate].
   final ChildIndexGetter? findChildIndexCallback;
+
+  /// addAutomaticKeepAlives for [SliverChildBuilderDelegate].
   final bool addAutomaticKeepAlives;
 
+  /// addRepaintBoundaries for [SliverChildBuilderDelegate].
   final bool addRepaintBoundaries;
 
+  /// addSemanticIndexes for [SliverChildBuilderDelegate].
   final bool addSemanticIndexes;
 
-  final SemanticIndexCallback semanticIndexCallback;
-
+  /// semanticIndexOffset for [SliverChildBuilderDelegate].
   final int semanticIndexOffset;
 
-  /// CustomScrollView
+  /// semanticIndexCallback for [SliverChildBuilderDelegate].
+  final SemanticIndexCallback semanticIndexCallback;
+
+  /// scrollDirection for [CustomScrollView]
   final Axis scrollDirection;
+
+  /// reverse for [CustomScrollView]
   final bool reverse;
+
+  /// controller for [CustomScrollView]
   final ScrollController? controller;
+
+  /// primary for [CustomScrollView]
   final bool? primary;
+
+  /// physics for [CustomScrollView]
   final ScrollPhysics? physics;
+
+  /// scrollBehavior for [CustomScrollView]
   final ScrollBehavior? scrollBehavior;
+
+  /// shrinkWrap for [CustomScrollView]
   final bool shrinkWrap;
 
+  /// center for [CustomScrollView]
   final Key? center;
+
+  /// anchor for [CustomScrollView]
   final double anchor;
 
+  /// cacheExtent for [CustomScrollView]
   final double? cacheExtent;
+
+  /// semanticChildCount for [CustomScrollView]
   final int? semanticChildCount;
+
+  /// dragStartBehavior for [CustomScrollView]
   final DragStartBehavior dragStartBehavior;
 
+  /// keyboardDismissBehavior for [CustomScrollView]
   final ScrollViewKeyboardDismissBehavior keyboardDismissBehavior;
 
+  /// restorationId for [CustomScrollView]
   final String? restorationId;
+
+  /// clipBehavior for [CustomScrollView]
   final Clip clipBehavior;
 
   const GroupedScrollView({
@@ -133,7 +172,7 @@ class GroupedScrollView<T, H> extends StatelessWidget {
     this.keyboardDismissBehavior = ScrollViewKeyboardDismissBehavior.manual,
     this.restorationId,
     this.clipBehavior = Clip.hardEdge,
-  }) ;
+  });
 
   const GroupedScrollView.list({
     super.key,
@@ -193,10 +232,15 @@ class GroupedScrollView<T, H> extends StatelessWidget {
         child: stickyHeaderBuilder(context, header, i),
       ));
       section.add(null != gridDelegate
-          ? SliverGrid(delegate: _buildSliverChildDelegate(items), gridDelegate: gridDelegate!)
+          ? SliverGrid(
+              delegate: _buildSliverChildDelegate(items),
+              gridDelegate: gridDelegate!)
           : SliverList(delegate: _buildSliverChildDelegate(items)));
-      if (groups - 1 == i && null != footerBuilder) section.add(footerBuilder!(context));
-      slivers.add(MultiSliver(key: key, pushPinnedChildren: true, children: section));
+      if (groups - 1 == i && null != footerBuilder) {
+        section.add(footerBuilder!(context));
+      }
+      slivers.add(
+          MultiSliver(key: key, pushPinnedChildren: true, children: section));
     }
     return CustomScrollView(
       key: key,
@@ -220,7 +264,8 @@ class GroupedScrollView<T, H> extends StatelessWidget {
   }
 
   _buildSliverChildDelegate(List<T> items) {
-    return SliverChildBuilderDelegate((context, idx) => itemBuilder(context, items[idx]),
+    return SliverChildBuilderDelegate(
+        (context, idx) => itemBuilder(context, items[idx]),
         addRepaintBoundaries: addRepaintBoundaries,
         addAutomaticKeepAlives: addAutomaticKeepAlives,
         addSemanticIndexes: addSemanticIndexes,

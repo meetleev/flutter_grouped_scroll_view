@@ -8,7 +8,8 @@ class GroupedGridViewTestPage extends StatefulWidget {
   const GroupedGridViewTestPage({super.key, required this.crossAxisCount});
 
   @override
-  State<GroupedGridViewTestPage> createState() => _GroupedGridViewTestPageState();
+  State<GroupedGridViewTestPage> createState() =>
+      _GroupedGridViewTestPageState();
 }
 
 class _GroupedGridViewTestPageState extends State<GroupedGridViewTestPage> {
@@ -17,11 +18,14 @@ class _GroupedGridViewTestPageState extends State<GroupedGridViewTestPage> {
     return Scaffold(
       body: GroupedScrollView.grid(
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            mainAxisSpacing: 5, crossAxisSpacing: 5, crossAxisCount: widget.crossAxisCount),
+            mainAxisSpacing: 5,
+            crossAxisSpacing: 5,
+            crossAxisCount: widget.crossAxisCount),
         itemGrouper: (Person person) {
           return person.birthYear;
         },
-        stickyHeaderBuilder: (BuildContext context, int year, int idx) => Container(
+        stickyHeaderBuilder: (BuildContext context, int year, int idx) =>
+            Container(
           color: Colors.white,
           padding: const EdgeInsets.all(8),
           constraints: const BoxConstraints.tightFor(height: 30),

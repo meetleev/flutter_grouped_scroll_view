@@ -78,8 +78,10 @@ class _MainAppState extends State<MainAppPage> {
       ),
       bottomNavigationBar: BottomNavigationBar(
         items: [
-          BottomNavigationBarItem(icon: const Icon(Icons.group), label: _titles.elementAt(0)),
-          BottomNavigationBarItem(icon: const Icon(Icons.group), label: _titles.elementAt(1)),
+          BottomNavigationBarItem(
+              icon: const Icon(Icons.group), label: _titles.elementAt(0)),
+          BottomNavigationBarItem(
+              icon: const Icon(Icons.group), label: _titles.elementAt(1)),
         ],
         currentIndex: _curIdx,
         onTap: (idx) => setState(() => {_curIdx = idx}),
