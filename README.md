@@ -7,7 +7,7 @@ A package to display a grouped list of items. Provide a List, a grouper, and let
 
 | Gridview | ListView |
 | :--------------: | :---------------------: |
-| ![](https://github.com/GLeeWei/grouped_scroll_view/raw/main/example/assets/gridview.gif) | ![](https://github.com/GLeeWei/grouped_scroll_view/raw/main/example/assets/listview.gif)     |
+| ![](https://github.com/GLeeWei/static_resources/raw/main/grouped_scroll_view/gridview.gif) | ![](https://github.com/GLeeWei/static_resources/raw/main/grouped_scroll_view/listview.gif)     |
 
 ## Getting Started
 

@@ -32,7 +32,6 @@ migrate_working_dir/
 .pub/
 /build/
 /test/
-/assets/
 /pubspec.lock
 
 # Web related
