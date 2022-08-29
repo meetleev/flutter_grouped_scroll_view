@@ -11,7 +11,9 @@ A package to display a grouped list of items. Provide a List, a grouper, and let
 
 
 ## Getting Started
+
 Add the package to your `pubspec.yaml`:
+
 ```yaml
 dependencies:
   grouped_scroll_view: <latest_version>
