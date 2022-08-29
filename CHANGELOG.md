@@ -1,3 +1,7 @@
+## 0.0.3
+
+* update readme.md.
+
 ## 0.0.2
 
 * more of the public API has dartdoc comments.

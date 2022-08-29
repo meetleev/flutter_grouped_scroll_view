@@ -1,6 +1,6 @@
 name: grouped_scroll_view
 description:  A package to display a grouped list of items. Provide a List, a grouper, and let it display it as a ListView, a GridView or anything else. Grouped by headers.
-version: 0.0.2
+version: 0.0.3
 homepage: https://github.com/GLeeWei
 repository: https://github.com/GLeeWei/grouped_scroll_view
 
