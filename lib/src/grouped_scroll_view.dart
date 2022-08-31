@@ -1,6 +1,9 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
+import 'package:grouped_scroll_view/src/grouped_scroll_view_options.dart';
+import 'package:grouped_scroll_view/src/toggle/toggle.dart';
+import 'package:grouped_scroll_view/src/toggle/toggle_controller.dart';
 import 'package:sliver_tools/sliver_tools.dart';
 
 int _kDefaultSemanticIndexCallback(Widget _, int localIndex) => localIndex;
@@ -16,21 +19,11 @@ class GroupedScrollView<T, H> extends StatelessWidget {
   /// Footer
   final Widget Function(BuildContext context)? footerBuilder;
 
-  /// Optional [Function] that helps sort the groups by comparing the [H] stickyHeaders.
-  final Comparator<H>? stickyHeaderSorter;
-
   /// Optional [Function] that helps sort the groups by comparing the [T] items.
   final Comparator<T>? itemsSorter;
 
-  /// stickyHeaderBuilder
-  final Widget Function(BuildContext context, H header, int idx)
-      stickyHeaderBuilder;
-
   /// itemBuilder
   final Widget Function(BuildContext context, T item) itemBuilder;
-
-  /// itemGrouper
-  final H Function(T item) itemGrouper;
 
   /// The delegate that controls the size and position of the children.
   final SliverGridDelegate? gridDelegate;
@@ -60,7 +53,7 @@ class GroupedScrollView<T, H> extends StatelessWidget {
   final bool reverse;
 
   /// controller for [CustomScrollView]
-  final ScrollController? controller;
+  final ScrollController? scrollController;
 
   /// primary for [CustomScrollView]
   final bool? primary;
@@ -98,15 +91,22 @@ class GroupedScrollView<T, H> extends StatelessWidget {
   /// clipBehavior for [CustomScrollView]
   final Clip clipBehavior;
 
+  /// toggleController on edit mode. if this not null, open edit mode.
+  final GroupedToggleController? toggleController;
+
+  final GroupedScrollViewOptions<T, H>? groupedOptions;
+
   const GroupedScrollView({
     Key? key,
     required this.data,
     this.headerBuilder,
     this.footerBuilder,
-    required this.stickyHeaderBuilder,
     required this.itemBuilder,
-    required this.itemGrouper,
     this.gridDelegate,
+    this.itemsSorter,
+
+    /// grouped
+    this.groupedOptions,
 
     /// SliverChildBuilderDelegate
     this.findChildIndexCallback,
@@ -115,13 +115,11 @@ class GroupedScrollView<T, H> extends StatelessWidget {
     this.addSemanticIndexes = true,
     this.semanticIndexCallback = _kDefaultSemanticIndexCallback,
     this.semanticIndexOffset = 0,
-    this.stickyHeaderSorter,
-    this.itemsSorter,
 
     /// CustomScrollView
     this.scrollDirection = Axis.vertical,
     this.reverse = false,
-    this.controller,
+    this.scrollController,
     this.primary,
     this.physics,
     this.scrollBehavior,
@@ -134,17 +132,23 @@ class GroupedScrollView<T, H> extends StatelessWidget {
     this.keyboardDismissBehavior = ScrollViewKeyboardDismissBehavior.manual,
     this.restorationId,
     this.clipBehavior = Clip.hardEdge,
+    this.toggleController,
   }) : super(key: key);
 
   const GroupedScrollView.grid({
     super.key,
     required this.data,
-    required this.stickyHeaderBuilder,
     required this.itemBuilder,
-    required this.itemGrouper,
     required this.gridDelegate,
     this.headerBuilder,
     this.footerBuilder,
+    this.itemsSorter,
+
+    /// grouped
+    this.groupedOptions,
+
+    /// toggle
+    this.toggleController,
 
     /// SliverChildBuilderDelegate
     this.findChildIndexCallback,
@@ -153,13 +157,11 @@ class GroupedScrollView<T, H> extends StatelessWidget {
     this.addSemanticIndexes = true,
     this.semanticIndexCallback = _kDefaultSemanticIndexCallback,
     this.semanticIndexOffset = 0,
-    this.stickyHeaderSorter,
-    this.itemsSorter,
 
     /// CustomScrollView
     this.scrollDirection = Axis.vertical,
     this.reverse = false,
-    this.controller,
+    this.scrollController,
     this.primary,
     this.physics,
     this.scrollBehavior,
@@ -177,11 +179,16 @@ class GroupedScrollView<T, H> extends StatelessWidget {
   const GroupedScrollView.list({
     super.key,
     required this.data,
-    required this.stickyHeaderBuilder,
     required this.itemBuilder,
-    required this.itemGrouper,
     this.headerBuilder,
     this.footerBuilder,
+    this.itemsSorter,
+
+    /// grouped
+    this.groupedOptions,
+
+    /// toggle
+    this.toggleController,
 
     /// SliverChildBuilderDelegate
     this.findChildIndexCallback,
@@ -190,13 +197,11 @@ class GroupedScrollView<T, H> extends StatelessWidget {
     this.addSemanticIndexes = true,
     this.semanticIndexCallback = _kDefaultSemanticIndexCallback,
     this.semanticIndexOffset = 0,
-    this.stickyHeaderSorter,
-    this.itemsSorter,
 
     /// CustomScrollView
     this.scrollDirection = Axis.vertical,
     this.reverse = false,
-    this.controller,
+    this.scrollController,
     this.primary,
     this.physics,
     this.scrollBehavior,
@@ -213,40 +218,11 @@ class GroupedScrollView<T, H> extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    Map<H, List<T>> groupItems = groupBy(data, itemGrouper);
-    List<H> keys = groupItems.keys.toList();
-    if (stickyHeaderSorter != null) {
-      keys.sort(stickyHeaderSorter);
-    }
-    List<Widget> slivers = [];
-    final groups = keys.length;
-    for (var i = 0; i < groups; i++) {
-      H header = keys[i];
-      List<T> items = groupItems[header]!;
-      if (itemsSorter != null) {
-        items.sort(itemsSorter);
-      }
-      List<Widget> section = [];
-      if (0 == i && null != headerBuilder) section.add(headerBuilder!(context));
-      section.add(SliverPinnedHeader(
-        child: stickyHeaderBuilder(context, header, i),
-      ));
-      section.add(null != gridDelegate
-          ? SliverGrid(
-              delegate: _buildSliverChildDelegate(items),
-              gridDelegate: gridDelegate!)
-          : SliverList(delegate: _buildSliverChildDelegate(items)));
-      if (groups - 1 == i && null != footerBuilder) {
-        section.add(footerBuilder!(context));
-      }
-      slivers.add(
-          MultiSliver(key: key, pushPinnedChildren: true, children: section));
-    }
     return CustomScrollView(
       key: key,
       scrollDirection: scrollDirection,
       reverse: reverse,
-      controller: controller,
+      controller: scrollController,
       primary: primary,
       physics: physics,
       scrollBehavior: scrollBehavior,
@@ -259,13 +235,70 @@ class GroupedScrollView<T, H> extends StatelessWidget {
       keyboardDismissBehavior: keyboardDismissBehavior,
       restorationId: restorationId,
       clipBehavior: clipBehavior,
-      slivers: slivers,
+      slivers: null != groupedOptions ? _buildGroupMode(context) : _buildNormalMode(context),
     );
+  }
+
+  List<Widget> _buildNormalMode(BuildContext context) {
+    if (itemsSorter != null) {
+      data.sort(itemsSorter);
+    }
+    List<Widget> section = [];
+    if (null != headerBuilder) section.add(SliverToBoxAdapter(child: headerBuilder!(context)));
+    section.add(null != gridDelegate
+        ? SliverGrid(delegate: _buildSliverChildDelegate(data), gridDelegate: gridDelegate!)
+        : SliverList(delegate: _buildSliverChildDelegate(data)));
+    if (null != footerBuilder) {
+      section.add(SliverToBoxAdapter(
+        child: footerBuilder!(context),
+      ));
+    }
+    return section;
+  }
+
+  List<Widget> _buildGroupMode(BuildContext context) {
+    final options = groupedOptions!;
+    List<Widget> slivers = [];
+    Map<H, List<T>> groupItems = groupBy(data, options.itemGrouper);
+    List<H> keys = groupItems.keys.toList();
+    if (options.stickyHeaderSorter != null) {
+      keys.sort(options.stickyHeaderSorter);
+    }
+    final groups = keys.length;
+    for (var i = 0; i < groups; i++) {
+      H header = keys[i];
+      List<T> items = groupItems[header]!;
+      if (itemsSorter != null) {
+        items.sort(itemsSorter);
+      }
+      List<Widget> section = [];
+      if (0 == i && null != headerBuilder) section.add(headerBuilder!(context));
+      section.add(SliverPinnedHeader(
+        child: options.stickyHeaderBuilder(context, header, i),
+      ));
+      section.add(null != gridDelegate
+          ? SliverGrid(delegate: _buildSliverChildDelegate(items), gridDelegate: gridDelegate!)
+          : SliverList(delegate: _buildSliverChildDelegate(items)));
+      if (groups - 1 == i && null != footerBuilder) {
+        section.add(footerBuilder!(context));
+      }
+      slivers.add(MultiSliver(key: key, pushPinnedChildren: true, children: section));
+    }
+    return slivers;
   }
 
   _buildSliverChildDelegate(List<T> items) {
     return SliverChildBuilderDelegate(
-        (context, idx) => itemBuilder(context, items[idx]),
+        (context, idx) => null != toggleController
+            ? ToggleContainer(
+                controller: toggleController!,
+                body: itemBuilder(
+                  context,
+                  items[idx],
+                ),
+                index: data.indexOf(items[idx]),
+              )
+            : itemBuilder(context, items[idx]),
         addRepaintBoundaries: addRepaintBoundaries,
         addAutomaticKeepAlives: addAutomaticKeepAlives,
         addSemanticIndexes: addSemanticIndexes,

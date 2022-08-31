@@ -1,3 +1,9 @@
+## 0.0.4
+
+* Supports multiple selection or single selection in the list
+* Supports normal list/grid
+* Supports custom toggleStyle of selected 
+
 ## 0.0.3
 
 * update readme.md.
