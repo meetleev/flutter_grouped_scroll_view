@@ -1,4 +1,4 @@
-## 0.0.4
+## 0.0.5
 
 * Supports checkbox or radio in the list
 * Supports normal list/grid
