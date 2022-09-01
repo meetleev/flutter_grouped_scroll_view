@@ -1,4 +1,5 @@
 import 'package:example/test_data_cache.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:grouped_scroll_view/grouped_scroll_view.dart';
 
@@ -6,9 +7,14 @@ class GroupedListViewTestPage extends StatefulWidget {
   final String title;
   final GroupedToggleType? toggleType;
   final bool grouped;
+  final bool separated;
 
   const GroupedListViewTestPage(
-      {super.key, required this.title, this.toggleType, this.grouped = true});
+      {super.key,
+      required this.title,
+      this.toggleType,
+      this.grouped = true,
+      this.separated = false});
 
   @override
   State<GroupedListViewTestPage> createState() =>
@@ -23,8 +29,12 @@ class _GroupedListViewTestPageState extends State<GroupedListViewTestPage> {
     if (null != widget.toggleType) {
       _toggleController = GroupedToggleController(
           toggleType: widget.toggleType!,
-          onToggleChanged: (int idx, bool selected) => print(
-              'GroupedListViewTestPage:onToggleChanged===>idx:[$idx]--selected:[$selected]'),
+          onToggleChanged: (int idx, bool selected) {
+            if (kDebugMode) {
+              print(
+                  'GroupedListViewTestPage:onToggleChanged===>idx:[$idx]--selected:[$selected]');
+            }
+          },
           toggleStyle: GroupedToggleStyle(
               activeWidget: Positioned(
                   right: 5,
@@ -111,6 +121,9 @@ class _GroupedListViewTestPageState extends State<GroupedListViewTestPage> {
           ],
         ),
         toggleController: _toggleController,
+        separatorBuilder: (BuildContext context, int index) => const SizedBox(
+          height: 20,
+        ),
       ),
     );
   }

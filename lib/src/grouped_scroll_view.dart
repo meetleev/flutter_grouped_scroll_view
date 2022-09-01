@@ -5,6 +5,7 @@ import 'package:grouped_scroll_view/src/grouped_scroll_view_options.dart';
 import 'package:grouped_scroll_view/src/toggle/toggle.dart';
 import 'package:grouped_scroll_view/src/toggle/toggle_controller.dart';
 import 'package:sliver_tools/sliver_tools.dart';
+import 'dart:math' as math;
 
 int _kDefaultSemanticIndexCallback(Widget _, int localIndex) => localIndex;
 
@@ -91,8 +92,14 @@ class GroupedScrollView<T, H> extends StatelessWidget {
   /// clipBehavior for [CustomScrollView]
   final Clip clipBehavior;
 
+  /// separatorBuilder for [List]
+  final IndexedWidgetBuilder? separatorBuilder;
+
   /// toggleController on edit mode. If this not null, open edit mode.
   final GroupedToggleController? toggleController;
+
+  /// The toggleItemSize is used for the size of the checkbox container in the list.
+  final Size? toggleItemSize;
 
   final GroupedScrollViewOptions<T, H>? groupedOptions;
 
@@ -102,8 +109,13 @@ class GroupedScrollView<T, H> extends StatelessWidget {
     this.headerBuilder,
     this.footerBuilder,
     required this.itemBuilder,
-    this.gridDelegate,
     this.itemsSorter,
+
+    /// grid
+    this.gridDelegate,
+
+    /// list
+    this.separatorBuilder,
 
     /// grouped
     this.groupedOptions,
@@ -132,7 +144,10 @@ class GroupedScrollView<T, H> extends StatelessWidget {
     this.keyboardDismissBehavior = ScrollViewKeyboardDismissBehavior.manual,
     this.restorationId,
     this.clipBehavior = Clip.hardEdge,
+
+    /// toggle
     this.toggleController,
+    this.toggleItemSize,
   }) : super(key: key);
 
   const GroupedScrollView.grid({
@@ -174,7 +189,8 @@ class GroupedScrollView<T, H> extends StatelessWidget {
     this.keyboardDismissBehavior = ScrollViewKeyboardDismissBehavior.manual,
     this.restorationId,
     this.clipBehavior = Clip.hardEdge,
-  });
+  })  : separatorBuilder = null,
+        toggleItemSize = null;
 
   const GroupedScrollView.list({
     super.key,
@@ -183,12 +199,14 @@ class GroupedScrollView<T, H> extends StatelessWidget {
     this.headerBuilder,
     this.footerBuilder,
     this.itemsSorter,
+    this.separatorBuilder,
 
     /// grouped
     this.groupedOptions,
 
     /// toggle
     this.toggleController,
+    this.toggleItemSize,
 
     /// SliverChildBuilderDelegate
     this.findChildIndexCallback,
@@ -246,8 +264,9 @@ class GroupedScrollView<T, H> extends StatelessWidget {
       data.sort(itemsSorter);
     }
     List<Widget> section = [];
-    if (null != headerBuilder)
+    if (null != headerBuilder) {
       section.add(SliverToBoxAdapter(child: headerBuilder!(context)));
+    }
     section.add(null != gridDelegate
         ? SliverGrid(
             delegate: _buildSliverChildDelegate(data),
@@ -297,22 +316,48 @@ class GroupedScrollView<T, H> extends StatelessWidget {
 
   _buildSliverChildDelegate(List<T> items) {
     return SliverChildBuilderDelegate(
-        (context, idx) => null != toggleController
-            ? ToggleContainer(
-                controller: toggleController!,
-                body: itemBuilder(
-                  context,
-                  items[idx],
-                ),
-                index: data.indexOf(items[idx]),
-              )
-            : itemBuilder(context, items[idx]),
+        (context, idx) => _sliverChildBuilder(context, idx, items),
         addRepaintBoundaries: addRepaintBoundaries,
         addAutomaticKeepAlives: addAutomaticKeepAlives,
         addSemanticIndexes: addSemanticIndexes,
         findChildIndexCallback: findChildIndexCallback,
         semanticIndexOffset: semanticIndexOffset,
         semanticIndexCallback: semanticIndexCallback,
-        childCount: items.length);
+        childCount: _isHasListSeparatorBuilder()
+            ? _computeActualChildCount(items.length)
+            : items.length);
+  }
+
+  // Helper method to compute the actual child count for the separated constructor.
+  static int _computeActualChildCount(int itemCount) {
+    return math.max(0, itemCount * 2 - 1);
+  }
+
+  _isHasListSeparatorBuilder() {
+    return null == gridDelegate && null != separatorBuilder;
+  }
+
+  _sliverChildBuilder(BuildContext context, int index, List<T> items) {
+    if (_isHasListSeparatorBuilder()) {
+      final int itemIndex = index ~/ 2;
+      return index.isEven
+          ? _sliverChildBuilderWithoutSeparator(context, items[itemIndex])
+          : separatorBuilder!(context, itemIndex);
+    }
+    return _sliverChildBuilderWithoutSeparator(context, items[index]);
+  }
+
+  _sliverChildBuilderWithoutSeparator(BuildContext context, T item) {
+    return null != toggleController
+        ? ToggleContainer(
+            size: toggleItemSize,
+            controller: toggleController!,
+            body: itemBuilder(
+              context,
+              item,
+            ),
+            index: data.indexOf(item),
+          )
+        : itemBuilder(context, item);
   }
 }

@@ -1,4 +1,5 @@
 import 'package:example/test_data_cache.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:grouped_scroll_view/grouped_scroll_view.dart';
 
@@ -29,10 +30,14 @@ class _GroupedGridViewTestPageState extends State<GroupedGridViewTestPage> {
       _toggleController = GroupedToggleController(
         toggleType: widget.toggleType!,
         onToggleChanged: (int idx, bool selected) {
-          print(
-              'GroupedGridViewTestPage:onToggleChanged===>idx:[$idx]--selected:[$selected]');
-          print(
-              'GroupedGridViewTestPage===> all selected indexes:[${_toggleController!.selectedIndexes}]');
+          if (kDebugMode) {
+            print(
+                'GroupedGridViewTestPage:onToggleChanged===>idx:[$idx]--selected:[$selected]');
+          }
+          if (kDebugMode) {
+            print(
+                'GroupedGridViewTestPage===> all selected indexes:[${_toggleController!.selectedIndexes}]');
+          }
         },
       );
     }

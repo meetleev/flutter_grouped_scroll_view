@@ -5,16 +5,20 @@ import 'package:grouped_scroll_view/src/toggle/toggle_type.dart';
 
 typedef OnToggleChanged = void Function(int idx, bool isChecked);
 
+const double _defaultListSize = 20;
+
 class ToggleContainer extends StatefulWidget {
   final GroupedToggleController controller;
   final Widget body;
   final int index;
+  final Size? size;
 
   const ToggleContainer({
     super.key,
     required this.controller,
     required this.body,
     required this.index,
+    this.size,
   });
 
   @override
@@ -24,7 +28,7 @@ class ToggleContainer extends StatefulWidget {
 class _ToggleContainerState extends State<ToggleContainer> {
   late GroupedToggleController _controller;
   late GroupedToggleStyle _toggleStyle;
-  Size? bodySize;
+  Size? _bodySize;
 
   @override
   void initState() {
@@ -42,54 +46,68 @@ class _ToggleContainerState extends State<ToggleContainer> {
 
   @override
   Widget build(BuildContext context) {
-    _Toggle? toggle;
-    return GestureDetector(
-      onTap: () => _onSelected(toggle!, widget.index),
-      child: AbsorbPointer(
-          child: Stack(
+    return LayoutBuilder(
+        builder: (BuildContext context, BoxConstraints constraints) {
+      _Toggle? toggle;
+      return GestureDetector(
+        onTap: () => _onSelected(toggle!, widget.index),
+        child: AbsorbPointer(
+            child: Stack(
+          children: [
+            widget.body,
+            AnimatedBuilder(
+                animation: _controller,
+                builder: (BuildContext __, Widget? _) {
+                  bool isChecked =
+                      widget.controller.selectedIndexes.contains(widget.index);
+                  toggle = _Toggle(
+                    key: widget.key,
+                    isChecked: isChecked,
+                    activeWidget: _toggleStyle.activeWidget,
+                  );
+                  return isChecked
+                      ? _selectedBuilder(constraints, toggle!)
+                      : toggle!;
+                }),
+          ],
+        )),
+      );
+    });
+  }
+
+  _selectedBuilder(BoxConstraints constraints, _Toggle toggle) {
+    final Color activeContainerColor =
+        _toggleStyle.activeContainerColor ?? Colors.blue.withOpacity(0.5);
+    return SizedBox(
+      width: (null == _bodySize)
+          ? (constraints.hasTightWidth
+              ? constraints.maxWidth
+              : _defaultListSize)
+          : _bodySize?.width,
+      height: (null == _bodySize)
+          ? (constraints.hasTightHeight
+              ? constraints.maxHeight
+              : _defaultListSize)
+          : _bodySize?.height,
+      child: Stack(
         children: [
-          widget.body,
-          AnimatedBuilder(
-              animation: _controller,
-              builder: (BuildContext __, Widget? _) {
-                bool isChecked =
-                    widget.controller.selectedIndexes.contains(widget.index);
-                toggle = _Toggle(
-                  key: widget.key,
-                  isChecked: isChecked,
-                  activeWidget: _toggleStyle.activeWidget,
-                );
-                final Color activeContainerColor =
-                    _toggleStyle.activeContainerColor ??
-                        Colors.blue.withOpacity(0.5);
-                return isChecked
-                    ? SizedBox(
-                        width: bodySize?.width,
-                        height: bodySize?.height,
-                        child: Stack(
-                          children: [
-                            Container(
-                              decoration:
-                                  BoxDecoration(color: activeContainerColor),
-                            ),
-                            toggle!
-                          ],
-                        ),
-                      )
-                    : toggle!;
-              }),
+          Container(
+            decoration: BoxDecoration(color: activeContainerColor),
+          ),
+          toggle
         ],
-      )),
+      ),
     );
   }
 
   _buildController() {
     _controller = widget.controller;
     _toggleStyle = _controller.toggleStyle ?? const GroupedToggleStyle();
+    _bodySize ??= widget.size;
   }
 
   void _onSelected(_Toggle toggle, int idx) {
-    bodySize = context.size;
+    _bodySize ??= context.size;
     if (GroupedToggleType.radio == _controller.toggleType) {
       if (toggle.isChecked) return;
       _controller.radioSelected(idx);

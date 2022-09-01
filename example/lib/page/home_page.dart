@@ -102,6 +102,14 @@ class _HomePageState extends State<HomePage> {
           title: 'Checkboxes in the list',
         ));
       }),
+      _buildExampleElementWidget('Separated in the list', () {
+        _navigateToPage(const GroupedListViewTestPage(
+          grouped: true,
+          separated: true,
+          toggleType: GroupedToggleType.radio,
+          title: 'Separated in the list',
+        ));
+      }),
     ];
   }
 

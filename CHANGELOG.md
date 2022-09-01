@@ -1,6 +1,10 @@
+## 0.0.6
+
+* Supports separatorBuilder in a list
+
 ## 0.0.5
 
-* Supports checkbox or radio in the list
+* Supports checkbox or radio in a list
 * Supports normal list/grid
 * Supports custom toggleStyle of selected 
 
