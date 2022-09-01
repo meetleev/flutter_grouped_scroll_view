@@ -177,7 +177,7 @@ GroupedScrollView.grid(
           )
 ```
 ## Additional information
-* If the list needs to support checkbox or radio, please set the controller
+* If the list needs to support checkbox or radio, please set the toggleController
 ``` dart
 GroupedScrollView.grid({
     data: List<T>,
