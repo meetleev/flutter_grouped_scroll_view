@@ -5,13 +5,41 @@
 A package to display a grouped list of items. Provide a List, a grouper, and let it display it as a ListView, a GridView or anything else. Grouped by headers.
 ## Preview
 
-| GroupedGridView | GroupedListView | Checkboxes in a groupedGridView |
-| :--------------: | :---------------------: | :--------------: |
-| ![](https://github.com/GLeeWei/static_resources/raw/main/grouped_scroll_view/grouped_grid.gif) | ![](https://github.com/GLeeWei/static_resources/raw/main/grouped_scroll_view/grouped_list.gif) | ![](https://github.com/GLeeWei/static_resources/raw/main/grouped_scroll_view/grouped_grid_checkBox.gif) |
+<table>
+    <tr>
+        <th>GroupedGridView</th>
+        <th>GroupedListView</th>
+        <th>Checkboxes in a groupedGridView</th>
+        <th>Checkboxes in a groupedListView</th>
+        <th>Radios in a groupedGridView</th>
+    </tr>
+    <tr>
+        <td><img width="250px" src="https://github.com/GLeeWei/static_resources/raw/main/grouped_scroll_view/grouped_grid.gif" alt=""/></td>
+        <td><img width="250px" src="https://github.com/GLeeWei/static_resources/raw/main/grouped_scroll_view/grouped_list.gif" alt=""/></td>
+        <td><img width="250px" src="https://github.com/GLeeWei/static_resources/raw/main/grouped_scroll_view/grouped_grid_checkBox.gif" alt=""/></td>
+        <td><img width="250px" src="https://github.com/GLeeWei/static_resources/raw/main/grouped_scroll_view/grouped_list_checkBox.gif" alt=""/></td>
+        <td><img width="250px" src="https://github.com/GLeeWei/static_resources/raw/main/grouped_scroll_view/grouped_grid_radio.gif" alt=""/></td>
+    </tr>
+</table>
 
-| Radios in a groupedListView | CheckBoxes in a gridView | Radios in a listView |
-| :---------------------: | :--------------: | :---------------------: |
-| ![](https://github.com/GLeeWei/static_resources/raw/main/grouped_scroll_view/grouped_list_radio.gif)  | ![](https://github.com/GLeeWei/static_resources/raw/main/grouped_scroll_view/grid_checkBox.gif) | ![](https://github.com/GLeeWei/static_resources/raw/main/grouped_scroll_view/list_radio.gif) |
+<table>
+    <tr>
+        <th>Radios in a groupedListView</th>
+        <th>Checkboxes in a gridView</th>
+        <th>Checkboxes in a listView</th>
+        <th>Radios in a gridView</th>
+        <th>Radios in a listView</th>
+    </tr>
+    <tr>
+        <td><img width="250px" src="https://github.com/GLeeWei/static_resources/raw/main/grouped_scroll_view/grouped_list_radio.gif" alt=""/></td>
+        <td><img width="250px" src="https://github.com/GLeeWei/static_resources/raw/main/grouped_scroll_view/grid_checkBox.gif" alt=""/></td>
+        <td><img width="250px" src="https://github.com/GLeeWei/static_resources/raw/main/grouped_scroll_view/list_checkBox.gif" alt=""/></td>
+        <td><img width="250px" src="https://github.com/GLeeWei/static_resources/raw/main/grouped_scroll_view/grid_radio.gif" alt=""/></td>
+        <td><img width="250px" src="https://github.com/GLeeWei/static_resources/raw/main/grouped_scroll_view/list_radio.gif" alt=""/></td>
+    </tr>
+</table>
+
+
 ## Getting Started
 
 Add the package to your `pubspec.yaml`:
