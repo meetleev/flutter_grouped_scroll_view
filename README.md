@@ -7,18 +7,18 @@ A package to display a grouped list of items. Provide a List, a grouper, and let
 
 <table>
     <tr>
-        <td><img width="150px" src="https://github.com/GLeeWei/static_resources/raw/main/grouped_scroll_view/grouped_grid.gif" alt=""/></td>
-        <td><img width="150px" src="https://github.com/GLeeWei/static_resources/raw/main/grouped_scroll_view/grouped_list.gif" alt=""/></td>
-        <td><img width="150px" src="https://github.com/GLeeWei/static_resources/raw/main/grouped_scroll_view/grouped_grid_checkBox.gif" alt=""/></td>
-        <td><img width="150px" src="https://github.com/GLeeWei/static_resources/raw/main/grouped_scroll_view/grouped_list_checkBox.gif" alt=""/></td>
-        <td><img width="150px" src="https://github.com/GLeeWei/static_resources/raw/main/grouped_scroll_view/grouped_grid_radio.gif" alt=""/></td>
+        <td><img width="130px" src="https://github.com/GLeeWei/static_resources/raw/main/grouped_scroll_view/grouped_grid.gif" alt=""/></td>
+        <td><img width="130px" src="https://github.com/GLeeWei/static_resources/raw/main/grouped_scroll_view/grouped_list.gif" alt=""/></td>
+        <td><img width="130px" src="https://github.com/GLeeWei/static_resources/raw/main/grouped_scroll_view/grouped_grid_checkBox.gif" alt=""/></td>
+        <td><img width="130px" src="https://github.com/GLeeWei/static_resources/raw/main/grouped_scroll_view/grouped_list_checkBox.gif" alt=""/></td>
+        <td><img width="130px" src="https://github.com/GLeeWei/static_resources/raw/main/grouped_scroll_view/grouped_grid_radio.gif" alt=""/></td>
     </tr>
     <tr>
-        <td><img width="150px" src="https://github.com/GLeeWei/static_resources/raw/main/grouped_scroll_view/grouped_list_radio.gif" alt=""/></td>
-        <td><img width="150px" src="https://github.com/GLeeWei/static_resources/raw/main/grouped_scroll_view/grid_checkBox.gif" alt=""/></td>
-        <td><img width="150px" src="https://github.com/GLeeWei/static_resources/raw/main/grouped_scroll_view/list_checkBox.gif" alt=""/></td>
-        <td><img width="150px" src="https://github.com/GLeeWei/static_resources/raw/main/grouped_scroll_view/grid_radio.gif" alt=""/></td>
-        <td><img width="150px" src="https://github.com/GLeeWei/static_resources/raw/main/grouped_scroll_view/list_radio.gif" alt=""/></td>
+        <td><img width="130px" src="https://github.com/GLeeWei/static_resources/raw/main/grouped_scroll_view/grouped_list_radio.gif" alt=""/></td>
+        <td><img width="130px" src="https://github.com/GLeeWei/static_resources/raw/main/grouped_scroll_view/grid_checkBox.gif" alt=""/></td>
+        <td><img width="130px" src="https://github.com/GLeeWei/static_resources/raw/main/grouped_scroll_view/list_checkBox.gif" alt=""/></td>
+        <td><img width="130px" src="https://github.com/GLeeWei/static_resources/raw/main/grouped_scroll_view/grid_radio.gif" alt=""/></td>
+        <td><img width="130px" src="https://github.com/GLeeWei/static_resources/raw/main/grouped_scroll_view/list_radio.gif" alt=""/></td>
     </tr>
 </table>
 
