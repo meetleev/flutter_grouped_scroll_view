@@ -52,14 +52,16 @@ class _ToggleContainerState extends State<ToggleContainer> {
           AnimatedBuilder(
               animation: _controller,
               builder: (BuildContext __, Widget? _) {
-                bool isChecked = widget.controller.selectedIndexes.contains(widget.index);
+                bool isChecked =
+                    widget.controller.selectedIndexes.contains(widget.index);
                 toggle = _Toggle(
                   key: widget.key,
                   isChecked: isChecked,
                   activeWidget: _toggleStyle.activeWidget,
                 );
                 final Color activeContainerColor =
-                    _toggleStyle.activeContainerColor ?? Colors.blue.withOpacity(0.5);
+                    _toggleStyle.activeContainerColor ??
+                        Colors.blue.withOpacity(0.5);
                 return isChecked
                     ? SizedBox(
                         width: bodySize?.width,
@@ -67,7 +69,8 @@ class _ToggleContainerState extends State<ToggleContainer> {
                         child: Stack(
                           children: [
                             Container(
-                              decoration: BoxDecoration(color: activeContainerColor),
+                              decoration:
+                                  BoxDecoration(color: activeContainerColor),
                             ),
                             toggle!
                           ],
@@ -91,7 +94,9 @@ class _ToggleContainerState extends State<ToggleContainer> {
       if (toggle.isChecked) return;
       _controller.radioSelected(idx);
     } else {
-      toggle.isChecked ? _controller.unselected(idx) : _controller.selected(idx);
+      toggle.isChecked
+          ? _controller.unselected(idx)
+          : _controller.selected(idx);
     }
     _controller.onToggleChanged?.call(idx, !toggle.isChecked);
   }
@@ -118,7 +123,8 @@ class _Toggle extends StatelessWidget {
                 top: 5,
                 child: Container(
                   decoration: const BoxDecoration(color: Colors.blue),
-                  constraints: const BoxConstraints.tightFor(height: 25, width: 25),
+                  constraints:
+                      const BoxConstraints.tightFor(height: 25, width: 25),
                   child: const Icon(Icons.check),
                 )))
         : Container();

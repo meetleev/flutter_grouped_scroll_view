@@ -3,7 +3,6 @@ import 'package:grouped_scroll_view/src/toggle/toggle.dart';
 import 'package:grouped_scroll_view/src/toggle/toggle_style.dart';
 import 'package:grouped_scroll_view/src/toggle/toggle_type.dart';
 
-
 class GroupedToggleController extends ChangeNotifier {
   /// toggleStyle used to custom toggle.
   final GroupedToggleStyle? toggleStyle;

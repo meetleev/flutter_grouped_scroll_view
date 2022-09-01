@@ -5,10 +5,13 @@ class GroupedScrollViewOptions<T, H> {
   final Comparator<H>? stickyHeaderSorter;
 
   /// stickyHeaderBuilder
-  final Widget Function(BuildContext context, H header, int idx) stickyHeaderBuilder;
+  final Widget Function(BuildContext context, H header, int idx)
+      stickyHeaderBuilder;
 
   /// itemGrouper
   final H Function(T item) itemGrouper;
   GroupedScrollViewOptions(
-      {required this.stickyHeaderBuilder, required this.itemGrouper, this.stickyHeaderSorter});
+      {required this.stickyHeaderBuilder,
+      required this.itemGrouper,
+      this.stickyHeaderSorter});
 }

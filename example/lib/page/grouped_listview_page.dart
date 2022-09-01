@@ -7,10 +7,12 @@ class GroupedListViewTestPage extends StatefulWidget {
   final GroupedToggleType? toggleType;
   final bool grouped;
 
-  const GroupedListViewTestPage({super.key, required this.title, this.toggleType, this.grouped = true});
+  const GroupedListViewTestPage(
+      {super.key, required this.title, this.toggleType, this.grouped = true});
 
   @override
-  State<GroupedListViewTestPage> createState() => _GroupedListViewTestPageState();
+  State<GroupedListViewTestPage> createState() =>
+      _GroupedListViewTestPageState();
 }
 
 class _GroupedListViewTestPageState extends State<GroupedListViewTestPage> {
@@ -21,15 +23,16 @@ class _GroupedListViewTestPageState extends State<GroupedListViewTestPage> {
     if (null != widget.toggleType) {
       _toggleController = GroupedToggleController(
           toggleType: widget.toggleType!,
-          onToggleChanged: (int idx, bool selected) =>
-              print('GroupedListViewTestPage:onToggleChanged===>idx:[$idx]--selected:[$selected]'),
+          onToggleChanged: (int idx, bool selected) => print(
+              'GroupedListViewTestPage:onToggleChanged===>idx:[$idx]--selected:[$selected]'),
           toggleStyle: GroupedToggleStyle(
               activeWidget: Positioned(
                   right: 5,
                   top: 5,
                   child: Container(
                     decoration: const BoxDecoration(color: Colors.blue),
-                    constraints: const BoxConstraints.tightFor(height: 25, width: 25),
+                    constraints:
+                        const BoxConstraints.tightFor(height: 25, width: 25),
                     child: const Icon(Icons.check),
                   ))));
     }
@@ -43,7 +46,9 @@ class _GroupedListViewTestPageState extends State<GroupedListViewTestPage> {
                 itemGrouper: (Person person) {
                   return person.birthYear;
                 },
-                stickyHeaderBuilder: (BuildContext context, int year, int idx) => Container(
+                stickyHeaderBuilder: (BuildContext context, int year,
+                        int idx) =>
+                    Container(
                       color: Colors.white,
                       padding: const EdgeInsets.all(8),
                       constraints: const BoxConstraints.tightFor(height: 30),

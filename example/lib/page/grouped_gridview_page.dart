@@ -9,10 +9,15 @@ class GroupedGridViewTestPage extends StatefulWidget {
   final bool grouped;
 
   const GroupedGridViewTestPage(
-      {super.key, required this.crossAxisCount, this.toggleType, required this.title, this.grouped = true});
+      {super.key,
+      required this.crossAxisCount,
+      this.toggleType,
+      required this.title,
+      this.grouped = true});
 
   @override
-  State<GroupedGridViewTestPage> createState() => _GroupedGridViewTestPageState();
+  State<GroupedGridViewTestPage> createState() =>
+      _GroupedGridViewTestPageState();
 }
 
 class _GroupedGridViewTestPageState extends State<GroupedGridViewTestPage> {
@@ -24,8 +29,10 @@ class _GroupedGridViewTestPageState extends State<GroupedGridViewTestPage> {
       _toggleController = GroupedToggleController(
         toggleType: widget.toggleType!,
         onToggleChanged: (int idx, bool selected) {
-          print('GroupedGridViewTestPage:onToggleChanged===>idx:[$idx]--selected:[$selected]');
-          print('GroupedGridViewTestPage===> all selected indexes:[${_toggleController!.selectedIndexes}]');
+          print(
+              'GroupedGridViewTestPage:onToggleChanged===>idx:[$idx]--selected:[$selected]');
+          print(
+              'GroupedGridViewTestPage===> all selected indexes:[${_toggleController!.selectedIndexes}]');
         },
       );
     }
@@ -35,13 +42,17 @@ class _GroupedGridViewTestPageState extends State<GroupedGridViewTestPage> {
       ),
       body: GroupedScrollView.grid(
         gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-            mainAxisSpacing: 5, crossAxisSpacing: 5, crossAxisCount: widget.crossAxisCount),
+            mainAxisSpacing: 5,
+            crossAxisSpacing: 5,
+            crossAxisCount: widget.crossAxisCount),
         groupedOptions: widget.grouped
             ? GroupedScrollViewOptions(
                 itemGrouper: (Person person) {
                   return person.birthYear;
                 },
-                stickyHeaderBuilder: (BuildContext context, int year, int idx) => Container(
+                stickyHeaderBuilder: (BuildContext context, int year,
+                        int idx) =>
+                    Container(
                       color: Colors.white,
                       padding: const EdgeInsets.all(8),
                       constraints: const BoxConstraints.tightFor(height: 30),

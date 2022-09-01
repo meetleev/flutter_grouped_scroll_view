@@ -235,7 +235,9 @@ class GroupedScrollView<T, H> extends StatelessWidget {
       keyboardDismissBehavior: keyboardDismissBehavior,
       restorationId: restorationId,
       clipBehavior: clipBehavior,
-      slivers: null != groupedOptions ? _buildGroupMode(context) : _buildNormalMode(context),
+      slivers: null != groupedOptions
+          ? _buildGroupMode(context)
+          : _buildNormalMode(context),
     );
   }
 
@@ -244,9 +246,12 @@ class GroupedScrollView<T, H> extends StatelessWidget {
       data.sort(itemsSorter);
     }
     List<Widget> section = [];
-    if (null != headerBuilder) section.add(SliverToBoxAdapter(child: headerBuilder!(context)));
+    if (null != headerBuilder)
+      section.add(SliverToBoxAdapter(child: headerBuilder!(context)));
     section.add(null != gridDelegate
-        ? SliverGrid(delegate: _buildSliverChildDelegate(data), gridDelegate: gridDelegate!)
+        ? SliverGrid(
+            delegate: _buildSliverChildDelegate(data),
+            gridDelegate: gridDelegate!)
         : SliverList(delegate: _buildSliverChildDelegate(data)));
     if (null != footerBuilder) {
       section.add(SliverToBoxAdapter(
@@ -277,12 +282,15 @@ class GroupedScrollView<T, H> extends StatelessWidget {
         child: options.stickyHeaderBuilder(context, header, i),
       ));
       section.add(null != gridDelegate
-          ? SliverGrid(delegate: _buildSliverChildDelegate(items), gridDelegate: gridDelegate!)
+          ? SliverGrid(
+              delegate: _buildSliverChildDelegate(items),
+              gridDelegate: gridDelegate!)
           : SliverList(delegate: _buildSliverChildDelegate(items)));
       if (groups - 1 == i && null != footerBuilder) {
         section.add(footerBuilder!(context));
       }
-      slivers.add(MultiSliver(key: key, pushPinnedChildren: true, children: section));
+      slivers.add(
+          MultiSliver(key: key, pushPinnedChildren: true, children: section));
     }
     return slivers;
   }
