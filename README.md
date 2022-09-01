@@ -183,7 +183,7 @@ GroupedScrollView.grid({
     data: List<T>,
     itemBuilder: (BuildContext context, T item) { /*...*/},
     toggleController: GroupedToggleController(
-        toggleType: GroupedToggleType.multiple,
+        toggleType: GroupedToggleType.checkbox,
         onToggleChanged: (int idx, bool selected) {
           // ...
         },
