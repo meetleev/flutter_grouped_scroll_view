@@ -189,5 +189,6 @@ GroupedScrollView.grid({
         },
         toggleStyle: GroupedToggleStyle(),
     ),
+    // ...
 });
 ```
