@@ -5,9 +5,18 @@
 A package to display a grouped list of items. Provide a List, a grouper, and let it display it as a ListView, a GridView or anything else. Grouped by headers.
 ## Preview
 
-| Gridview | ListView |
+| GroupedGridView | GroupedListView |
 | :--------------: | :---------------------: |
-| ![](https://github.com/GLeeWei/static_resources/raw/main/grouped_scroll_view/gridview.gif) | ![](https://github.com/GLeeWei/static_resources/raw/main/grouped_scroll_view/listview.gif)     |
+| ![](https://github.com/GLeeWei/static_resources/raw/main/grouped_scroll_view/grouped_grid.gif) | ![](https://github.com/GLeeWei/static_resources/raw/main/grouped_scroll_view/grouped_list.gif)     |
+
+| Checkboxes in a groupedGridView | Radios in a groupedListView |
+| :--------------: | :---------------------: |
+| ![](https://github.com/GLeeWei/static_resources/raw/main/grouped_scroll_view/grouped_grid_checkBox.gif) | ![](https://github.com/GLeeWei/static_resources/raw/main/grouped_scroll_view/grouped_list_radio.gif)     |
+
+| CheckBoxes in a gridView | Radios in a listView |
+| :--------------: | :---------------------: |
+| ![](https://github.com/GLeeWei/static_resources/raw/main/grouped_scroll_view/grid_checkBox.gif) | ![](https://github.com/GLeeWei/static_resources/raw/main/grouped_scroll_view/list_radio.gif)     |
+
 
 ## Getting Started
 
@@ -22,7 +31,7 @@ dependencies:
 * support stickyHeader
 * support customHeader
 * support customFooter
-* Supports multiple selection or single selection in the list
+* Support **checkbox** or **radio** in the list
 
 ## Usage
 * grouped for grid view
@@ -161,4 +170,19 @@ GroupedScrollView.grid(
               ],
             ),
           )
+```
+## Additional information
+* If the list needs to support checkbox or radio, please set the controller
+``` dart
+GroupedScrollView.grid({
+    data: List<T>,
+    itemBuilder: (BuildContext context, T item) { /*...*/},
+    toggleController: GroupedToggleController(
+        toggleType: GroupedToggleType.multiple,
+        onToggleChanged: (int idx, bool selected) {
+          // ...
+        },
+        toggleStyle: GroupedToggleStyle(),
+    ),
+});
 ```

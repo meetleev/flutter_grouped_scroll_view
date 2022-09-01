@@ -1,6 +1,6 @@
 ## 0.0.4
 
-* Supports multiple selection or single selection in the list
+* Supports checkbox or radio in the list
 * Supports normal list/grid
 * Supports custom toggleStyle of selected 
 

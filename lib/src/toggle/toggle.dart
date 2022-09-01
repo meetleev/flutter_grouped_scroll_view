@@ -87,7 +87,7 @@ class _ToggleContainerState extends State<ToggleContainer> {
 
   void _onSelected(_Toggle toggle, int idx) {
     bodySize = context.size;
-    if (GroupedToggleType.single == _controller.toggleType) {
+    if (GroupedToggleType.radio == _controller.toggleType) {
       if (toggle.isChecked) return;
       _controller.radioSelected(idx);
     } else {

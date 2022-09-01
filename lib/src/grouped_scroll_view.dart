@@ -91,7 +91,7 @@ class GroupedScrollView<T, H> extends StatelessWidget {
   /// clipBehavior for [CustomScrollView]
   final Clip clipBehavior;
 
-  /// toggleController on edit mode. if this not null, open edit mode.
+  /// toggleController on edit mode. If this not null, open edit mode.
   final GroupedToggleController? toggleController;
 
   final GroupedScrollViewOptions<T, H>? groupedOptions;

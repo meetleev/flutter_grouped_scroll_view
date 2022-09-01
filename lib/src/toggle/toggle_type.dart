@@ -1,5 +1,5 @@
 /// event types
 enum GroupedToggleType {
-  single,
-  multiple,
+  radio,
+  checkBox,
 }

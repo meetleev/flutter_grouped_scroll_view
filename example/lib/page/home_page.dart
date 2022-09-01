@@ -22,7 +22,7 @@ class _HomePageState extends State<HomePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('video test'),
+        title: const Text('Grouped scrollView test'),
       ),
       body: ListView(
         children: [..._buildExampleWidgets()],
@@ -46,45 +46,60 @@ class _HomePageState extends State<HomePage> {
           title: 'GroupedList',
         ));
       }),
-      _buildExampleElementWidget('Multiple choice for groupedGrid', () {
+      _buildExampleElementWidget('CheckBoxes in a groupedGrid', () {
         _navigateToPage(const GroupedGridViewTestPage(
           crossAxisCount: 3,
-          toggleType: GroupedToggleType.multiple,
-          title: 'multiple choice for GroupedGrid',
+          toggleType: GroupedToggleType.checkBox,
+          title: 'CheckBoxes in a groupedGrid',
         ));
       }),
-      _buildExampleElementWidget('Multiple choice for groupedList', () {
+      _buildExampleElementWidget('CheckBoxes in a groupedList', () {
         _navigateToPage(const GroupedListViewTestPage(
-          toggleType: GroupedToggleType.multiple,
-          title: 'multiple choice for groupedList',
+          toggleType: GroupedToggleType.checkBox,
+          title: 'CheckBoxes in a groupedList',
         ));
       }),
-      _buildExampleElementWidget('Single choice for groupedGrid', () {
+      _buildExampleElementWidget('Radios in a groupedGrid', () {
         _navigateToPage(const GroupedGridViewTestPage(
           crossAxisCount: 3,
-          toggleType: GroupedToggleType.single,
-          title: 'single choice for GroupedGrid',
+          toggleType: GroupedToggleType.radio,
+          title: 'Radios in a groupedGrid',
         ));
       }),
-      _buildExampleElementWidget('Single choice for groupedList', () {
+      _buildExampleElementWidget('Radios in a groupedList', () {
         _navigateToPage(const GroupedListViewTestPage(
-          toggleType: GroupedToggleType.single,
-          title: 'single choice for groupedList',
+          toggleType: GroupedToggleType.radio,
+          title: 'Radios in a groupedList',
         ));
       }),
-      _buildExampleElementWidget('Single choice for grid', () {
+      _buildExampleElementWidget('Radios in a grid', () {
         _navigateToPage(const GroupedGridViewTestPage(
           grouped: false,
           crossAxisCount: 3,
-          toggleType: GroupedToggleType.single,
-          title: 'single choice for grid',
+          toggleType: GroupedToggleType.radio,
+          title: 'Radios in a grid',
         ));
       }),
-      _buildExampleElementWidget('Single choice for list', () {
+      _buildExampleElementWidget('Radios in a list', () {
         _navigateToPage(const GroupedListViewTestPage(
           grouped: false,
-          toggleType: GroupedToggleType.single,
-          title: 'single choice for list',
+          toggleType: GroupedToggleType.radio,
+          title: 'Radios in a list',
+        ));
+      }),
+      _buildExampleElementWidget('CheckBoxes in a grid', () {
+        _navigateToPage(const GroupedGridViewTestPage(
+          grouped: false,
+          crossAxisCount: 3,
+          toggleType: GroupedToggleType.checkBox,
+          title: 'CheckBoxes in the grid',
+        ));
+      }),
+      _buildExampleElementWidget('CheckBoxes in the list', () {
+        _navigateToPage(const GroupedListViewTestPage(
+          grouped: false,
+          toggleType: GroupedToggleType.checkBox,
+          title: 'CheckBoxes in the list',
         ));
       }),
     ];
