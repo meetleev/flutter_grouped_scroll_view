@@ -46,17 +46,17 @@ class _HomePageState extends State<HomePage> {
           title: 'GroupedList',
         ));
       }),
-      _buildExampleElementWidget('CheckBoxes in a groupedGrid', () {
+      _buildExampleElementWidget('Checkboxes in a groupedGrid', () {
         _navigateToPage(const GroupedGridViewTestPage(
           crossAxisCount: 3,
-          toggleType: GroupedToggleType.checkBox,
-          title: 'CheckBoxes in a groupedGrid',
+          toggleType: GroupedToggleType.checkbox,
+          title: 'Checkboxes in a groupedGrid',
         ));
       }),
-      _buildExampleElementWidget('CheckBoxes in a groupedList', () {
+      _buildExampleElementWidget('Checkboxes in a groupedList', () {
         _navigateToPage(const GroupedListViewTestPage(
-          toggleType: GroupedToggleType.checkBox,
-          title: 'CheckBoxes in a groupedList',
+          toggleType: GroupedToggleType.checkbox,
+          title: 'Checkboxes in a groupedList',
         ));
       }),
       _buildExampleElementWidget('Radios in a groupedGrid', () {
@@ -87,19 +87,19 @@ class _HomePageState extends State<HomePage> {
           title: 'Radios in a list',
         ));
       }),
-      _buildExampleElementWidget('CheckBoxes in a grid', () {
+      _buildExampleElementWidget('Checkboxes in a grid', () {
         _navigateToPage(const GroupedGridViewTestPage(
           grouped: false,
           crossAxisCount: 3,
-          toggleType: GroupedToggleType.checkBox,
-          title: 'CheckBoxes in the grid',
+          toggleType: GroupedToggleType.checkbox,
+          title: 'Checkboxes in the grid',
         ));
       }),
-      _buildExampleElementWidget('CheckBoxes in the list', () {
+      _buildExampleElementWidget('Checkboxes in the list', () {
         _navigateToPage(const GroupedListViewTestPage(
           grouped: false,
-          toggleType: GroupedToggleType.checkBox,
-          title: 'CheckBoxes in the list',
+          toggleType: GroupedToggleType.checkbox,
+          title: 'Checkboxes in the list',
         ));
       }),
     ];

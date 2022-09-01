@@ -21,7 +21,7 @@ class GroupedToggleController extends ChangeNotifier {
   GroupedToggleController(
       {this.toggleStyle,
       this.onToggleChanged,
-      this.toggleType = GroupedToggleType.checkBox,
+      this.toggleType = GroupedToggleType.checkbox,
       List<int> selectedIndexes = const []})
       : _selectedIndexes = selectedIndexes.toSet();
 
