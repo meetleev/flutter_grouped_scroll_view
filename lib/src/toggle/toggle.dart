@@ -62,6 +62,7 @@ class _ToggleContainerState extends State<ToggleContainer> {
                     _toggleStyle.activeContainerColor ?? Colors.blue.withOpacity(0.5);
                 return isChecked
                     ? SizedBox(
+                        width: bodySize?.width,
                         height: bodySize?.height,
                         child: Stack(
                           children: [

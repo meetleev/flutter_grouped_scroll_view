@@ -23,8 +23,10 @@ class _GroupedGridViewTestPageState extends State<GroupedGridViewTestPage> {
     if (null != widget.toggleType) {
       _toggleController = GroupedToggleController(
         toggleType: widget.toggleType!,
-        onToggleChanged: (int idx, bool selected) =>
-            print('GroupedGridViewTestPage:onToggleChanged===>idx:[$idx]--selected:[$selected]'),
+        onToggleChanged: (int idx, bool selected) {
+          print('GroupedGridViewTestPage:onToggleChanged===>idx:[$idx]--selected:[$selected]');
+          print('GroupedGridViewTestPage===> all selected indexes:[${_toggleController!.selectedIndexes}]');
+        },
       );
     }
     return Scaffold(
