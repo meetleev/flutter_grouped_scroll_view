@@ -12,12 +12,14 @@ class ToggleContainer extends StatefulWidget {
   final Widget body;
   final int index;
   final Size? size;
+  final bool toggleEnabled;
 
   const ToggleContainer({
     super.key,
     required this.controller,
     required this.body,
     required this.index,
+    required this.toggleEnabled,
     this.size,
   });
 
@@ -50,27 +52,29 @@ class _ToggleContainerState extends State<ToggleContainer> {
         builder: (BuildContext context, BoxConstraints constraints) {
       _Toggle? toggle;
       return GestureDetector(
-        onTap: () => _onSelected(toggle!, widget.index),
+        onTap: () =>
+            widget.toggleEnabled ? _onSelected(toggle!, widget.index) : {},
         child: AbsorbPointer(
+            absorbing: widget.toggleEnabled,
             child: Stack(
-          children: [
-            widget.body,
-            AnimatedBuilder(
-                animation: _controller,
-                builder: (BuildContext __, Widget? _) {
-                  bool isChecked =
-                      widget.controller.selectedIndexes.contains(widget.index);
-                  toggle = _Toggle(
-                    key: widget.key,
-                    isChecked: isChecked,
-                    activeWidget: _toggleStyle.activeWidget,
-                  );
-                  return isChecked
-                      ? _selectedBuilder(constraints, toggle!)
-                      : toggle!;
-                }),
-          ],
-        )),
+              children: [
+                widget.body,
+                AnimatedBuilder(
+                    animation: _controller,
+                    builder: (BuildContext __, Widget? _) {
+                      bool isChecked = widget.controller.selectedIndexes
+                          .contains(widget.index);
+                      toggle = _Toggle(
+                        key: widget.key,
+                        isChecked: isChecked,
+                        activeWidget: _toggleStyle.activeWidget,
+                      );
+                      return isChecked
+                          ? _selectedBuilder(constraints, toggle!)
+                          : toggle!;
+                    }),
+              ],
+            )),
       );
     });
   }
@@ -109,8 +113,9 @@ class _ToggleContainerState extends State<ToggleContainer> {
   void _onSelected(_Toggle toggle, int idx) {
     _bodySize ??= context.size;
     if (GroupedToggleType.radio == _controller.toggleType) {
-      if (toggle.isChecked)
+      if (toggle.isChecked) {
         return _controller.onToggleChanged?.call(idx, toggle.isChecked);
+      }
       _controller.radioSelected(idx);
     } else {
       toggle.isChecked

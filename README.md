@@ -177,9 +177,9 @@ GroupedScrollView.grid(
           )
 ```
 ## Additional information
-* If the list needs to support checkbox or radio, please set the toggleController
+* If the list needs to support checkbox or radio, please set toggleEnabled is true
 ``` dart
-GroupedScrollView.grid({
+GroupedScrollViewWithToggle.grid({
     data: List<T>,
     itemBuilder: (BuildContext context, T item) { /*...*/},
     toggleController: GroupedToggleController(
@@ -189,6 +189,7 @@ GroupedScrollView.grid({
         },
         toggleStyle: GroupedToggleStyle(),
     ),
+    toggleEnabled: true,
     // ...
 });
 ```

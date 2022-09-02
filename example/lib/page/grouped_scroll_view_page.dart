@@ -1,0 +1,174 @@
+import 'package:example/test_data_cache.dart';
+import 'package:flutter/material.dart';
+import 'package:grouped_scroll_view/grouped_scroll_view.dart';
+
+class GroupedScrollViewTestPage extends StatelessWidget {
+  final int crossAxisCount;
+  final String title;
+  final bool grouped;
+  final bool separated;
+
+  const GroupedScrollViewTestPage({
+    super.key,
+    required this.title,
+    this.crossAxisCount = 0,
+    this.grouped = true,
+    this.separated = false,
+  });
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text(title),
+      ),
+      body: 0 < crossAxisCount ? _buildGridView() : _buildListView(),
+    );
+  }
+
+  Widget _buildListView() {
+    return GroupedScrollView.list(
+      groupedOptions: grouped
+          ? GroupedScrollViewOptions(
+              itemGrouper: (Person person) {
+                return person.birthYear;
+              },
+              stickyHeaderBuilder: (BuildContext context, int year, int idx) =>
+                  Container(
+                    color: Colors.white,
+                    padding: const EdgeInsets.all(8),
+                    constraints: const BoxConstraints.tightFor(height: 30),
+                    child: Text(
+                      '$year',
+                      style: const TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                  ))
+          : null,
+      itemBuilder: (BuildContext context, Person item) {
+        return Container(
+          constraints: const BoxConstraints.expand(height: 35),
+          child: Column(
+            children: [
+              Container(
+                constraints: const BoxConstraints.expand(height: 30),
+                color: Colors.lightGreen,
+                child: Center(
+                  child: Text(
+                    item.name,
+                    style: const TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                ),
+              ), //SizedBox(height: 5,)
+            ],
+          ),
+        );
+      },
+      data: DataCache.instance.persons,
+      headerBuilder: (BuildContext context) => Column(
+        children: const [
+          Divider(
+            thickness: 5,
+          ),
+          Center(
+            child: Text(
+              'CustomHeader',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+          ),
+          Divider(
+            thickness: 5,
+          ),
+        ],
+      ),
+      footerBuilder: (BuildContext context) => Column(
+        children: const [
+          Divider(
+            thickness: 5,
+          ),
+          Center(
+            child: Text(
+              'CustomFooter',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+          ),
+          Divider(
+            thickness: 5,
+          ),
+        ],
+      ),
+      separatorBuilder: (BuildContext context, int index) => const SizedBox(
+        height: 20,
+      ),
+    );
+  }
+
+  Widget _buildGridView() {
+    return GroupedScrollView.grid(
+      gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+          mainAxisSpacing: 5,
+          crossAxisSpacing: 5,
+          crossAxisCount: crossAxisCount),
+      groupedOptions: grouped
+          ? GroupedScrollViewOptions(
+              itemGrouper: (Person person) {
+                return person.birthYear;
+              },
+              stickyHeaderBuilder: (BuildContext context, int year, int idx) =>
+                  Container(
+                    color: Colors.white,
+                    padding: const EdgeInsets.all(8),
+                    constraints: const BoxConstraints.tightFor(height: 30),
+                    child: Text(
+                      '$year',
+                      style: const TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                  ))
+          : null,
+      itemBuilder: (BuildContext context, Person item) {
+        return Container(
+          color: Colors.lightGreen,
+          padding: const EdgeInsets.all(8),
+          child: Center(
+            child: Text(
+              item.name,
+              style: const TextStyle(fontWeight: FontWeight.bold),
+            ),
+          ),
+        );
+      },
+      data: DataCache.instance.persons,
+      headerBuilder: (BuildContext context) => Column(
+        children: const [
+          Divider(
+            thickness: 5,
+          ),
+          Center(
+            child: Text(
+              'CustomHeader',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+          ),
+          Divider(
+            thickness: 5,
+          ),
+        ],
+      ),
+      footerBuilder: (BuildContext context) => Column(
+        children: const [
+          Divider(
+            thickness: 5,
+          ),
+          Center(
+            child: Text(
+              'CustomFooter',
+              style: TextStyle(fontWeight: FontWeight.bold),
+            ),
+          ),
+          Divider(
+            thickness: 5,
+          ),
+        ],
+      ),
+    );
+  }
+}

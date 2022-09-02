@@ -1,3 +1,7 @@
+## 0.0.8
+
+* add new class **GroupedScrollViewWithToggle**, toggle separate from the GroupedScrollView. 
+
 ## 0.0.7
 
 * Supports separatorBuilder in a list

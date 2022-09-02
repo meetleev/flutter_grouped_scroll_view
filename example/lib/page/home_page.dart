@@ -1,7 +1,8 @@
-import 'package:example/page/grouped_gridview_page.dart';
-import 'package:example/page/grouped_listview_page.dart';
+import 'package:example/page/grouped_scroll_view_page.dart';
 import 'package:flutter/material.dart';
 import 'package:grouped_scroll_view/grouped_scroll_view.dart';
+
+import 'grouped_scroll_view_with_toggle_page.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key, required this.title}) : super(key: key);
@@ -36,44 +37,59 @@ class _HomePageState extends State<HomePage> {
         height: 10,
       ),
       _buildExampleElementWidget('GroupedGrid', () {
-        _navigateToPage(const GroupedGridViewTestPage(
+        _navigateToPage(const GroupedScrollViewTestPage(
           crossAxisCount: 3,
           title: 'GroupedGrid',
         ));
       }),
       _buildExampleElementWidget('GroupedList', () {
-        _navigateToPage(const GroupedListViewTestPage(
+        _navigateToPage(const GroupedScrollViewTestPage(
           title: 'GroupedList',
         ));
       }),
+      _buildExampleElementWidget('Checkboxes in a groupedGrid on editMode', () {
+        _navigateToPage(const GroupedScrollViewWithToggleTestPage(
+          crossAxisCount: 3,
+          toggleType: GroupedToggleType.checkbox,
+          editModeTest: true,
+          title: 'Checkboxes in a groupedGrid on editMode',
+        ));
+      }),
+      _buildExampleElementWidget('Checkboxes in a list on editMode', () {
+        _navigateToPage(const GroupedScrollViewWithToggleTestPage(
+          toggleType: GroupedToggleType.checkbox,
+          editModeTest: true,
+          title: 'Checkboxes in a list on editMode',
+        ));
+      }),
       _buildExampleElementWidget('Checkboxes in a groupedGrid', () {
-        _navigateToPage(const GroupedGridViewTestPage(
+        _navigateToPage(const GroupedScrollViewWithToggleTestPage(
           crossAxisCount: 3,
           toggleType: GroupedToggleType.checkbox,
           title: 'Checkboxes in a groupedGrid',
         ));
       }),
       _buildExampleElementWidget('Checkboxes in a groupedList', () {
-        _navigateToPage(const GroupedListViewTestPage(
+        _navigateToPage(const GroupedScrollViewWithToggleTestPage(
           toggleType: GroupedToggleType.checkbox,
           title: 'Checkboxes in a groupedList',
         ));
       }),
       _buildExampleElementWidget('Radios in a groupedGrid', () {
-        _navigateToPage(const GroupedGridViewTestPage(
+        _navigateToPage(const GroupedScrollViewWithToggleTestPage(
           crossAxisCount: 3,
           toggleType: GroupedToggleType.radio,
           title: 'Radios in a groupedGrid',
         ));
       }),
       _buildExampleElementWidget('Radios in a groupedList', () {
-        _navigateToPage(const GroupedListViewTestPage(
+        _navigateToPage(const GroupedScrollViewWithToggleTestPage(
           toggleType: GroupedToggleType.radio,
           title: 'Radios in a groupedList',
         ));
       }),
       _buildExampleElementWidget('Radios in a grid', () {
-        _navigateToPage(const GroupedGridViewTestPage(
+        _navigateToPage(const GroupedScrollViewWithToggleTestPage(
           grouped: false,
           crossAxisCount: 3,
           toggleType: GroupedToggleType.radio,
@@ -81,33 +97,33 @@ class _HomePageState extends State<HomePage> {
         ));
       }),
       _buildExampleElementWidget('Radios in a list', () {
-        _navigateToPage(const GroupedListViewTestPage(
+        _navigateToPage(const GroupedScrollViewWithToggleTestPage(
           grouped: false,
           toggleType: GroupedToggleType.radio,
           title: 'Radios in a list',
         ));
       }),
       _buildExampleElementWidget('Checkboxes in a grid', () {
-        _navigateToPage(const GroupedGridViewTestPage(
+        _navigateToPage(const GroupedScrollViewWithToggleTestPage(
           grouped: false,
           crossAxisCount: 3,
           toggleType: GroupedToggleType.checkbox,
           title: 'Checkboxes in the grid',
         ));
       }),
-      _buildExampleElementWidget('Checkboxes in the list', () {
-        _navigateToPage(const GroupedListViewTestPage(
+      _buildExampleElementWidget('Checkboxes in a list', () {
+        _navigateToPage(const GroupedScrollViewWithToggleTestPage(
           grouped: false,
           toggleType: GroupedToggleType.checkbox,
-          title: 'Checkboxes in the list',
+          title: 'Checkboxes in a list',
         ));
       }),
-      _buildExampleElementWidget('Separated in the list', () {
-        _navigateToPage(const GroupedListViewTestPage(
+      _buildExampleElementWidget('Separated in a list', () {
+        _navigateToPage(const GroupedScrollViewWithToggleTestPage(
           grouped: true,
           separated: true,
           toggleType: GroupedToggleType.radio,
-          title: 'Separated in the list',
+          title: 'Separated in a list',
         ));
       }),
     ];
