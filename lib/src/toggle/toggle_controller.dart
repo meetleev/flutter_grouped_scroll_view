@@ -1,7 +1,6 @@
 import 'package:flutter/widgets.dart';
 import 'package:grouped_scroll_view/src/toggle/toggle.dart';
 import 'package:grouped_scroll_view/src/toggle/toggle_style.dart';
-import 'package:grouped_scroll_view/src/toggle/toggle_type.dart';
 
 class GroupedToggleController extends ChangeNotifier {
   /// toggleStyle used to custom toggle.
@@ -9,9 +8,6 @@ class GroupedToggleController extends ChangeNotifier {
 
   /// onToggleChanged used to toggle.
   final OnToggleChanged? onToggleChanged;
-
-  /// toggleType used to toggle.
-  final GroupedToggleType toggleType;
 
   final Set<int> _selectedIndexes;
 
@@ -21,7 +17,6 @@ class GroupedToggleController extends ChangeNotifier {
   GroupedToggleController(
       {this.toggleStyle,
       this.onToggleChanged,
-      this.toggleType = GroupedToggleType.checkbox,
       List<int> selectedIndexes = const []})
       : _selectedIndexes = selectedIndexes.toSet();
 

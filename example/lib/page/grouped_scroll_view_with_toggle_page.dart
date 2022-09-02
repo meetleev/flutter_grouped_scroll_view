@@ -21,12 +21,10 @@ class GroupedScrollViewWithToggleTestPage extends StatefulWidget {
       this.separated = false});
 
   @override
-  State<GroupedScrollViewWithToggleTestPage> createState() =>
-      _GroupedScrollViewWithToggleTestPageState();
+  State<GroupedScrollViewWithToggleTestPage> createState() => _GroupedScrollViewWithToggleTestPageState();
 }
 
-class _GroupedScrollViewWithToggleTestPageState
-    extends State<GroupedScrollViewWithToggleTestPage> {
+class _GroupedScrollViewWithToggleTestPageState extends State<GroupedScrollViewWithToggleTestPage> {
   GroupedToggleController? _toggleController;
   bool _toggleEnabled = true;
 
@@ -60,15 +58,25 @@ class _GroupedScrollViewWithToggleTestPageState
   void _buildController() {
     if (null != widget.toggleType) {
       _toggleController ??= GroupedToggleController(
-        toggleType: widget.toggleType!,
+        toggleStyle: GroupedToggleStyle(
+            toggleType: widget.toggleType!,
+            activeWidget: 0 < widget.crossAxisCount
+                ? null
+                : Positioned(
+                    right: 5,
+                    top: 5,
+                    child: Container(
+                      decoration: const BoxDecoration(color: Colors.blue),
+                      constraints: const BoxConstraints.tightFor(height: 25, width: 25),
+                      child: const Icon(Icons.check),
+                    ))),
         onToggleChanged: (int idx, bool selected) {
           if (kDebugMode) {
-            print(
-                'GroupedToggleGridViewTestPage:onToggleChanged===>idx:[$idx]--selected:[$selected]');
+            print('GroupedScrollViewWithToggleTestPage:onToggleChanged===>idx:[$idx]--selected:[$selected]');
           }
           if (kDebugMode) {
             print(
-                'GroupedToggleGridViewTestPage===> all selected indexes:[${_toggleController!.selectedIndexes}]');
+                'GroupedScrollViewWithToggleTestPage===> all selected indexes:[${_toggleController!.selectedIndexes}]');
           }
           setState(() {});
         },
@@ -80,8 +88,7 @@ class _GroupedScrollViewWithToggleTestPageState
     if (widget.editModeTest) {
       return AppBar(
         title: _toggleEnabled
-            ? Text(
-                'Selected ${_toggleController!.selectedIndexes.length} items')
+            ? Text('Selected ${_toggleController!.selectedIndexes.length} items')
             : Text(widget.title),
         centerTitle: _toggleEnabled,
         actions: [
@@ -93,8 +100,7 @@ class _GroupedScrollViewWithToggleTestPageState
                 _toggleEnabled = !_toggleEnabled;
                 setState(() {});
               },
-              icon:
-                  Icon(_toggleEnabled ? Icons.check : Icons.check_box_outlined))
+              icon: Icon(_toggleEnabled ? Icons.check : Icons.check_box_outlined))
         ],
       );
     }
@@ -106,16 +112,13 @@ class _GroupedScrollViewWithToggleTestPageState
   _buildGridView() {
     return GroupedScrollViewWithToggle.grid(
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-          mainAxisSpacing: 5,
-          crossAxisSpacing: 5,
-          crossAxisCount: widget.crossAxisCount),
+          mainAxisSpacing: 5, crossAxisSpacing: 5, crossAxisCount: widget.crossAxisCount),
       groupedOptions: widget.grouped
           ? GroupedScrollViewOptions(
               itemGrouper: (Person person) {
                 return person.birthYear;
               },
-              stickyHeaderBuilder: (BuildContext context, int year, int idx) =>
-                  Container(
+              stickyHeaderBuilder: (BuildContext context, int year, int idx) => Container(
                     color: Colors.white,
                     padding: const EdgeInsets.all(8),
                     constraints: const BoxConstraints.tightFor(height: 30),
@@ -184,8 +187,7 @@ class _GroupedScrollViewWithToggleTestPageState
               itemGrouper: (Person person) {
                 return person.birthYear;
               },
-              stickyHeaderBuilder: (BuildContext context, int year, int idx) =>
-                  Container(
+              stickyHeaderBuilder: (BuildContext context, int year, int idx) => Container(
                     color: Colors.white,
                     padding: const EdgeInsets.all(8),
                     constraints: const BoxConstraints.tightFor(height: 30),
