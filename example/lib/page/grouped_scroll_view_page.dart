@@ -96,9 +96,11 @@ class GroupedScrollViewTestPage extends StatelessWidget {
           ),
         ],
       ),
-      separatorBuilder: (BuildContext context, int index) => const SizedBox(
-        height: 20,
-      ),
+      separatorBuilder: separated
+          ? (BuildContext context, int index) => const SizedBox(
+                height: 20,
+              )
+          : null,
     );
   }
 

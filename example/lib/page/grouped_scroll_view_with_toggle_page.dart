@@ -259,9 +259,11 @@ class _GroupedScrollViewWithToggleTestPageState
           ),
         ],
       ),
-      separatorBuilder: (BuildContext context, int index) => const SizedBox(
-        height: 20,
-      ),
+      separatorBuilder: widget.separated
+          ? (BuildContext context, int index) => const SizedBox(
+                height: 20,
+              )
+          : null,
       toggleController: _toggleController,
       toggleEnabled: _toggleEnabled,
     );
