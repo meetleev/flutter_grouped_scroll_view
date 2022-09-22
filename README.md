@@ -2,7 +2,7 @@
 [![Pub](https://img.shields.io/pub/v/grouped_scroll_view.svg?style=flat-square)](https://pub.dev/packages/grouped_scroll_view)
 [![support](https://img.shields.io/badge/platform-android%20|%20ios%20|%20web%20|%20macos%20|%20windows%20|%20linux%20-blue.svg)](https://pub.dev/packages/grouped_scroll_view)
 
-A package to display a grouped list of items. Provide a List, a grouper, and let it display it as a ListView, a GridView or anything else. Grouped by headers.
+A package to display a grouped list of items. Provide a List, a grouper, and let it display it as a ListView, a GridView or anything else. Supports checkbox or radio in a scrollView.
 ## Preview
 
 <table>
@@ -32,9 +32,10 @@ dependencies:
 
 ## Features
 * support stickyHeader
+* support customGrouper
 * support customHeader
 * support customFooter
-* Support **checkbox** or **radio** in the list
+* Support **checkbox** or **radio** in a scrollView
 
 ## Usage
 * grouped for grid view

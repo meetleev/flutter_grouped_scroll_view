@@ -247,7 +247,7 @@ class _GroupedToggleScrollViewState<T, H>
   @override
   void initState() {
     super.initState();
-    _controller ??= GroupedToggleController();
+    _controller ??= widget.toggleController ?? GroupedToggleController();
   }
 
   @override
@@ -293,7 +293,7 @@ class _GroupedToggleScrollViewState<T, H>
     return ToggleContainer(
       toggleEnabled: widget.toggleEnabled,
       size: widget.toggleItemSize,
-      controller: widget.toggleController!,
+      controller: _controller!,
       body: widget.itemBuilder(
         context,
         item,
@@ -316,5 +316,11 @@ class _GroupedToggleScrollViewState<T, H>
       }
     }
     super.didUpdateWidget(oldWidget);
+  }
+
+  @override
+  void dispose() {
+    _controller?.dispose();
+    super.dispose();
   }
 }

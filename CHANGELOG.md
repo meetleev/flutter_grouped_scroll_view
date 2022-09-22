@@ -1,6 +1,14 @@
+## 0.0.8+2
+
+* update readme.md.
+
+## 0.0.8+1
+
+* Modify the assignment error of _toggleController in GroupedScrollViewWithToggle
+
 ## 0.0.8
 
-* add new class **GroupedScrollViewWithToggle**, toggle separate from the GroupedScrollView. 
+* add new class **GroupedScrollViewWithToggle**, toggle separate from the GroupedScrollView.
 
 ## 0.0.7
 
@@ -10,7 +18,7 @@
 
 * Supports checkbox or radio in a list
 * Supports normal list/grid
-* Supports custom toggleStyle of selected 
+* Supports custom toggleStyle of selected
 
 ## 0.0.3
 
@@ -22,4 +30,4 @@
 
 ## 0.0.1
 
-*  initial release.
+* initial release.
