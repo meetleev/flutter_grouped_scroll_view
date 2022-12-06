@@ -53,7 +53,7 @@ class _GroupedScrollViewWithToggleTestPageState
 
   @override
   void dispose() {
-    _toggleController?.dispose();
+    _toggleController = null;
     super.dispose();
   }
 
