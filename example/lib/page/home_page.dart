@@ -1,3 +1,4 @@
+import 'package:example/page/grouped_scroll_view_index_page.dart';
 import 'package:example/page/grouped_scroll_view_page.dart';
 import 'package:flutter/material.dart';
 import 'package:grouped_scroll_view/grouped_scroll_view.dart';
@@ -125,6 +126,9 @@ class _HomePageState extends State<HomePage> {
           toggleType: GroupedToggleType.radio,
           title: 'Separated in a list',
         ));
+      }),
+      _buildExampleElementWidget('index test in a grid', () {
+        _navigateToPage(const GroupedScrollViewIndexTestPage());
       }),
     ];
   }

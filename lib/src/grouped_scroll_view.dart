@@ -10,6 +10,7 @@ int kDefaultSemanticIndexCallback(Widget _, int localIndex) => localIndex;
 typedef HeaderBuilder = Widget Function(BuildContext context);
 typedef FooterBuilder = Widget Function(BuildContext context);
 typedef ItemBuilder<T> = Widget Function(BuildContext context, T item);
+typedef ItemAtIndex<T> = void Function(int index, int total, int groupedIndex);
 
 @immutable
 class GroupedScrollView<T, H> extends StatelessWidget {
@@ -27,6 +28,9 @@ class GroupedScrollView<T, H> extends StatelessWidget {
 
   /// itemBuilder
   final ItemBuilder<T> itemBuilder;
+
+  /// ItemAtIndex
+  final ItemAtIndex? itemAtIndex;
 
   /// The delegate that controls the size and position of the children.
   final SliverGridDelegate? gridDelegate;
@@ -106,6 +110,7 @@ class GroupedScrollView<T, H> extends StatelessWidget {
     this.headerBuilder,
     this.footerBuilder,
     required this.itemBuilder,
+    this.itemAtIndex,
     this.itemsSorter,
 
     /// grid
@@ -151,6 +156,7 @@ class GroupedScrollView<T, H> extends StatelessWidget {
     this.headerBuilder,
     this.footerBuilder,
     this.itemsSorter,
+    this.itemAtIndex,
 
     /// grouped
     this.groupedOptions,
@@ -188,6 +194,7 @@ class GroupedScrollView<T, H> extends StatelessWidget {
     this.headerBuilder,
     this.footerBuilder,
     this.itemsSorter,
+    this.itemAtIndex,
     this.separatorBuilder,
 
     /// grouped
@@ -254,9 +261,9 @@ class GroupedScrollView<T, H> extends StatelessWidget {
     }
     section.add(null != gridDelegate
         ? SliverGrid(
-            delegate: _buildSliverChildDelegate(data),
+            delegate: _buildSliverChildDelegate(data, 0),
             gridDelegate: gridDelegate!)
-        : SliverList(delegate: _buildSliverChildDelegate(data)));
+        : SliverList(delegate: _buildSliverChildDelegate(data, 0)));
     if (null != footerBuilder) {
       section.add(SliverToBoxAdapter(
         child: footerBuilder!(context),
@@ -287,9 +294,9 @@ class GroupedScrollView<T, H> extends StatelessWidget {
       ));
       section.add(null != gridDelegate
           ? SliverGrid(
-              delegate: _buildSliverChildDelegate(items),
+              delegate: _buildSliverChildDelegate(items, i),
               gridDelegate: gridDelegate!)
-          : SliverList(delegate: _buildSliverChildDelegate(items)));
+          : SliverList(delegate: _buildSliverChildDelegate(items, i)));
       if (groups - 1 == i && null != footerBuilder) {
         section.add(footerBuilder!(context));
       }
@@ -299,9 +306,11 @@ class GroupedScrollView<T, H> extends StatelessWidget {
     return slivers;
   }
 
-  SliverChildBuilderDelegate _buildSliverChildDelegate(List<T> items) {
+  SliverChildBuilderDelegate _buildSliverChildDelegate(
+      List<T> items, int groupedIndex) {
     return SliverChildBuilderDelegate(
-        (context, idx) => _sliverChildBuilder(context, idx, items),
+        (context, idx) =>
+            _sliverChildBuilder(context, idx, items, groupedIndex),
         addRepaintBoundaries: addRepaintBoundaries,
         addAutomaticKeepAlives: addAutomaticKeepAlives,
         addSemanticIndexes: addSemanticIndexes,
@@ -322,13 +331,18 @@ class GroupedScrollView<T, H> extends StatelessWidget {
     return null == gridDelegate && null != separatorBuilder;
   }
 
-  Widget _sliverChildBuilder(BuildContext context, int index, List<T> items) {
+  Widget _sliverChildBuilder(
+      BuildContext context, int index, List<T> items, int groupedIndex) {
     if (_isHasListSeparatorBuilder()) {
       final int itemIndex = index ~/ 2;
-      return index.isEven
-          ? itemBuilder(context, items[itemIndex])
-          : separatorBuilder!(context, itemIndex);
+      if (index.isEven) {
+        if (null != itemAtIndex)
+          itemAtIndex!(itemIndex, items.length, groupedIndex);
+        return itemBuilder(context, items[itemIndex]);
+      }
+      return separatorBuilder!(context, itemIndex);
     }
+    if (null != itemAtIndex) itemAtIndex!(index, items.length, groupedIndex);
     return itemBuilder(context, items[index]);
   }
 }

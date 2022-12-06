@@ -126,16 +126,17 @@ class _GroupedScrollViewWithToggleTestPageState
               itemGrouper: (Person person) {
                 return person.birthYear;
               },
-              stickyHeaderBuilder: (BuildContext context, int year, int idx) =>
-                  Container(
-                    color: Colors.white,
-                    padding: const EdgeInsets.all(8),
-                    constraints: const BoxConstraints.tightFor(height: 30),
-                    child: Text(
-                      '$year',
-                      style: const TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                  ))
+              stickyHeaderBuilder:
+                  (BuildContext context, int year, int groupedIndex) =>
+                      Container(
+                        color: Colors.white,
+                        padding: const EdgeInsets.all(8),
+                        constraints: const BoxConstraints.tightFor(height: 30),
+                        child: Text(
+                          '$year',
+                          style: const TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                      ))
           : null,
       itemBuilder: (BuildContext context, Person item) {
         return Container(
@@ -196,16 +197,17 @@ class _GroupedScrollViewWithToggleTestPageState
               itemGrouper: (Person person) {
                 return person.birthYear;
               },
-              stickyHeaderBuilder: (BuildContext context, int year, int idx) =>
-                  Container(
-                    color: Colors.white,
-                    padding: const EdgeInsets.all(8),
-                    constraints: const BoxConstraints.tightFor(height: 30),
-                    child: Text(
-                      '$year',
-                      style: const TextStyle(fontWeight: FontWeight.bold),
-                    ),
-                  ))
+              stickyHeaderBuilder:
+                  (BuildContext context, int year, int groupedIndex) =>
+                      Container(
+                        color: Colors.white,
+                        padding: const EdgeInsets.all(8),
+                        constraints: const BoxConstraints.tightFor(height: 30),
+                        child: Text(
+                          '$year',
+                          style: const TextStyle(fontWeight: FontWeight.bold),
+                        ),
+                      ))
           : null,
       itemBuilder: (BuildContext context, Person item) {
         return Container(

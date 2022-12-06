@@ -1,3 +1,7 @@
+## 0.0.9
+
+* add ItemAtIndex callback used to return grouped index.
+
 ## 0.0.8+5
 
 * remove toggleController dispose on toggle_test when the widget dispose .

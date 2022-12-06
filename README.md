@@ -46,7 +46,7 @@ GroupedScrollView.grid(
                 itemGrouper: (Person person) {
                   return person.birthYear;
                 },
-                stickyHeaderBuilder: (BuildContext context, int year, int idx) => Container(
+                stickyHeaderBuilder: (BuildContext context, int year, int groupedIndex) => Container(
                       color: Colors.white,
                       padding: const EdgeInsets.all(8),
                       constraints: const BoxConstraints.tightFor(height: 30),
@@ -112,7 +112,7 @@ GroupedScrollView.grid(
             itemGrouper: (Person person) {
               return person.birthYear;
             },
-            stickyHeaderBuilder: (BuildContext context, int year, int idx) => Container(
+            stickyHeaderBuilder: (BuildContext context, int year, int groupedIndex) => Container(
                   color: Colors.white,
                   padding: const EdgeInsets.all(8),
                   constraints: const BoxConstraints.tightFor(height: 30),
