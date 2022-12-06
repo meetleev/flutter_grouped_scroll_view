@@ -75,7 +75,7 @@ class _GroupedScrollViewIndexTestPageState
                 style: const TextStyle(fontWeight: FontWeight.bold),
               ),
               Positioned(
-                  bottom: 0,
+                  bottom: 5,
                   child: Container(
                     alignment: Alignment.center,
                     height: 30,
