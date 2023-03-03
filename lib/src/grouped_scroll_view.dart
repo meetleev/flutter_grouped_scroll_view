@@ -336,8 +336,9 @@ class GroupedScrollView<T, H> extends StatelessWidget {
     if (_isHasListSeparatorBuilder()) {
       final int itemIndex = index ~/ 2;
       if (index.isEven) {
-        if (null != itemAtIndex)
+        if (null != itemAtIndex) {
           itemAtIndex!(itemIndex, items.length, groupedIndex);
+        }
         return itemBuilder(context, items[itemIndex]);
       }
       return separatorBuilder!(context, itemIndex);
