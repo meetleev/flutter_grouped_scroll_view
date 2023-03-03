@@ -7,16 +7,16 @@ A package to display a grouped list of items. Provide a List, a grouper, and let
 
 <table>
     <tr>
-        <td><img width="130px" src="https://github.com/meetleev/static_resources/raw/main/grouped_scroll_view/grouped_grid.gif" alt=""/></td>
-        <td><img width="130px" src="https://github.com/meetleev/static_resources/raw/main/grouped_scroll_view/grouped_list.gif" alt=""/></td>
-        <td><img width="130px" src="https://github.com/meetleev/static_resources/raw/main/grouped_scroll_view/grid_toggle_edit.gif" alt=""/></td>
-        <td><img width="130px" src="https://github.com/meetleev/static_resources/raw/main/grouped_scroll_view/list_toggle_edit.gif" alt=""/></td>
+        <td><img width="130px" src="https://github.com/meetleev/static_resources/blob/main/grouped_scroll_view/grouped_grid.gif" alt=""/></td>
+        <td><img width="130px" src="https://github.com/meetleev/static_resources/blob/main/grouped_scroll_view/grouped_list.gif" alt=""/></td>
+        <td><img width="130px" src="https://github.com/meetleev/static_resources/blob/main/grouped_scroll_view/grid_toggle_edit.gif" alt=""/></td>
+        <td><img width="130px" src="https://github.com/meetleev/static_resources/blob/main/grouped_scroll_view/list_toggle_edit.gif" alt=""/></td>
     </tr>
     <tr>
-        <td><img width="130px" src="https://github.com/meetleev/static_resources/raw/main/grouped_scroll_view/grouped_grid_checkbox.gif" alt=""/></td>
-        <td><img width="130px" src="https://github.com/meetleev/static_resources/raw/main/grouped_scroll_view/grouped_list_radio.gif" alt=""/></td>
-        <td><img width="130px" src="https://github.com/meetleev/static_resources/raw/main/grouped_scroll_view/grid_checkbox.gif" alt=""/></td>
-        <td><img width="130px" src="https://github.com/meetleev/static_resources/raw/main/grouped_scroll_view/list_radio.gif" alt=""/></td>
+        <td><img width="130px" src="https://github.com/meetleev/static_resources/blob/main/grouped_scroll_view/grouped_grid_checkbox.gif" alt=""/></td>
+        <td><img width="130px" src="https://github.com/meetleev/static_resources/blob/main/grouped_scroll_view/grouped_list_radio.gif" alt=""/></td>
+        <td><img width="130px" src="https://github.com/meetleev/static_resources/blob/main/grouped_scroll_view/grid_checkbox.gif" alt=""/></td>
+        <td><img width="130px" src="https://github.com/meetleev/static_resources/blob/main/grouped_scroll_view/list_radio.gif" alt=""/></td>
     </tr>
 </table>
 
