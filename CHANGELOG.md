@@ -1,3 +1,9 @@
+## 0.0.9+3
+
+* upgrade sliver_tools to 0.2.10
+* Aligns Dart and Flutter SDK constraints.
+
+
 ## 0.0.9+2
 
 * upgrade sliver_tools to 0.2.9
