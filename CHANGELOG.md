@@ -1,3 +1,8 @@
+## 0.0.10
+
+* upgrade sliver_tools to 0.2.12
+* upgrade collection to 1.17.1
+
 ## 0.0.9+3
 
 * upgrade sliver_tools to 0.2.10
