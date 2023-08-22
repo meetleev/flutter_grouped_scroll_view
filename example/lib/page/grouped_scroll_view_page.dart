@@ -65,8 +65,8 @@ class GroupedScrollViewTestPage extends StatelessWidget {
         );
       },
       data: DataCache.instance.persons,
-      headerBuilder: (BuildContext context) => Column(
-        children: const [
+      headerBuilder: (BuildContext context) => const Column(
+        children: [
           Divider(
             thickness: 5,
           ),
@@ -81,8 +81,8 @@ class GroupedScrollViewTestPage extends StatelessWidget {
           ),
         ],
       ),
-      footerBuilder: (BuildContext context) => Column(
-        children: const [
+      footerBuilder: (BuildContext context) => const Column(
+        children: [
           Divider(
             thickness: 5,
           ),
@@ -141,8 +141,8 @@ class GroupedScrollViewTestPage extends StatelessWidget {
         );
       },
       data: DataCache.instance.persons,
-      headerBuilder: (BuildContext context) => Column(
-        children: const [
+      headerBuilder: (BuildContext context) => const Column(
+        children: [
           Divider(
             thickness: 5,
           ),
@@ -157,8 +157,8 @@ class GroupedScrollViewTestPage extends StatelessWidget {
           ),
         ],
       ),
-      footerBuilder: (BuildContext context) => Column(
-        children: const [
+      footerBuilder: (BuildContext context) => const Column(
+        children: [
           Divider(
             thickness: 5,
           ),

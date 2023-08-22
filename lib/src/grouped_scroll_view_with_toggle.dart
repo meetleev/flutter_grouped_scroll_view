@@ -29,7 +29,7 @@ class GroupedScrollViewWithToggle<T, H> extends StatefulWidget {
   /// findChildIndexCallback for [SliverChildBuilderDelegate].
   final ChildIndexGetter? findChildIndexCallback;
 
-  /// addAutomaticKeepAlives for [SliverChildBuilderDelegate].
+  /// AutomaticKeepAlive for [SliverChildBuilderDelegate].
   final bool addAutomaticKeepAlives;
 
   /// addRepaintBoundaries for [SliverChildBuilderDelegate].

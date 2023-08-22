@@ -153,8 +153,8 @@ class _GroupedScrollViewWithToggleTestPageState
       data: DataCache.instance.persons,
       headerBuilder: (BuildContext context) => _toggleEnabled
           ? Container()
-          : Column(
-              children: const [
+          : const Column(
+              children: [
                 Divider(
                   thickness: 5,
                 ),
@@ -169,8 +169,8 @@ class _GroupedScrollViewWithToggleTestPageState
                 ),
               ],
             ),
-      footerBuilder: (BuildContext context) => Column(
-        children: const [
+      footerBuilder: (BuildContext context) => const Column(
+        children: [
           Divider(
             thickness: 5,
           ),
@@ -229,8 +229,8 @@ class _GroupedScrollViewWithToggleTestPageState
         );
       },
       data: DataCache.instance.persons,
-      headerBuilder: (BuildContext context) => Column(
-        children: const [
+      headerBuilder: (BuildContext context) => const Column(
+        children: [
           Divider(
             thickness: 5,
           ),
@@ -245,8 +245,8 @@ class _GroupedScrollViewWithToggleTestPageState
           ),
         ],
       ),
-      footerBuilder: (BuildContext context) => Column(
-        children: const [
+      footerBuilder: (BuildContext context) => const Column(
+        children: [
           Divider(
             thickness: 5,
           ),

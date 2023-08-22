@@ -38,7 +38,7 @@ class GroupedScrollView<T, H> extends StatelessWidget {
   /// findChildIndexCallback for [SliverChildBuilderDelegate].
   final ChildIndexGetter? findChildIndexCallback;
 
-  /// addAutomaticKeepAlives for [SliverChildBuilderDelegate].
+  /// AutomaticKeepAlive for [SliverChildBuilderDelegate].
   final bool addAutomaticKeepAlives;
 
   /// addRepaintBoundaries for [SliverChildBuilderDelegate].
