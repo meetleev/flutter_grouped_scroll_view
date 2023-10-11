@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
-import 'package:grouped_scroll_view/src/toggle/toggle.dart';
-import 'package:grouped_scroll_view/src/toggle/toggle_style.dart';
+import 'toggle.dart';
+import 'toggle_style.dart';
 
 class GroupedToggleController extends ChangeNotifier {
   /// toggleStyle used to custom toggle.

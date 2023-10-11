@@ -1,5 +1,5 @@
 import 'package:flutter/widgets.dart';
-import 'package:grouped_scroll_view/src/toggle/toggle_type.dart';
+import 'toggle_type.dart';
 
 class GroupedToggleStyle {
   /// toggleType used to toggle. Default [GroupedToggleType.checkbox].

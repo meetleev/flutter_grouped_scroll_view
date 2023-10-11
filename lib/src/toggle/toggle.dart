@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:grouped_scroll_view/src/toggle/toggle_style.dart';
-import 'package:grouped_scroll_view/src/toggle/toggle_controller.dart';
-import 'package:grouped_scroll_view/src/toggle/toggle_type.dart';
+import 'toggle_style.dart';
+import 'toggle_controller.dart';
+import 'toggle_type.dart';
 
 typedef OnToggleChanged = void Function(int idx, bool isChecked);
 

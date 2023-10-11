@@ -1,8 +1,9 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/widgets.dart';
-import 'package:grouped_scroll_view/src/toggle/toggle.dart';
-
-import '../grouped_scroll_view.dart';
+import 'grouped_scroll_view.dart';
+import 'toggle/toggle.dart';
+import 'options/grouped_scroll_view_options.dart';
+import 'toggle/toggle_controller.dart';
 
 class GroupedScrollViewWithToggle<T, H> extends StatefulWidget {
   /// data

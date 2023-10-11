@@ -31,10 +31,7 @@ dependencies:
 ```
 
 ## Features
-* support stickyHeader
-* support customGrouper
-* support customHeader
-* support customFooter
+* Support stickyHeader、customGrouper、 customHeader、customFooter
 * Support **checkbox** or **radio** in a scrollView
 
 ## Usage

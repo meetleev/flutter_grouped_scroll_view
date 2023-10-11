@@ -1,9 +1,10 @@
 import 'package:collection/collection.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:grouped_scroll_view/src/options/grouped_scroll_view_options.dart';
 import 'package:sliver_tools/sliver_tools.dart';
 import 'dart:math' as math;
+
+import 'options/grouped_scroll_view_options.dart';
 
 int kDefaultSemanticIndexCallback(Widget _, int localIndex) => localIndex;
 
