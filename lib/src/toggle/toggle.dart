@@ -20,7 +20,7 @@ class ToggleContainer extends StatefulWidget {
     required this.body,
     required this.index,
     required this.toggleEnabled,
-    this.size,
+    this.size
   });
 
   @override
@@ -55,7 +55,8 @@ class _ToggleContainerState extends State<ToggleContainer> {
         onTap: () =>
             widget.toggleEnabled ? _onSelected(toggle!, widget.index) : {},
         child: AbsorbPointer(
-            absorbing: widget.toggleEnabled,
+            absorbing: _toggleStyle.absorbChildPointer,
+            // absorbing: widget.toggleEnabled,
             child: Stack(
               children: [
                 widget.body,
@@ -82,7 +83,7 @@ class _ToggleContainerState extends State<ToggleContainer> {
   _selectedBuilder(BoxConstraints constraints, _Toggle toggle) {
     final Color activeContainerColor =
         _toggleStyle.activeContainerColor ?? Colors.blue.withOpacity(0.5);
-    return SizedBox(
+    return Container(
       width: (null == _bodySize)
           ? (constraints.hasTightWidth
               ? constraints.maxWidth
@@ -93,14 +94,8 @@ class _ToggleContainerState extends State<ToggleContainer> {
               ? constraints.maxHeight
               : _defaultListSize)
           : _bodySize?.height,
-      child: Stack(
-        children: [
-          Container(
-            decoration: BoxDecoration(color: activeContainerColor),
-          ),
-          toggle
-        ],
-      ),
+      decoration: BoxDecoration(color: activeContainerColor),
+      child: toggle,
     );
   }
 

@@ -243,12 +243,12 @@ class GroupedScrollViewWithToggle<T, H> extends StatefulWidget {
 
 class _GroupedToggleScrollViewState<T, H>
     extends State<GroupedScrollViewWithToggle<T, H>> {
-  GroupedToggleController? _controller;
+  late GroupedToggleController _controller;
 
   @override
   void initState() {
     super.initState();
-    _controller ??= widget.toggleController ?? GroupedToggleController();
+    _controller = widget.toggleController ?? GroupedToggleController();
   }
 
   @override
@@ -294,7 +294,7 @@ class _GroupedToggleScrollViewState<T, H>
     return ToggleContainer(
       toggleEnabled: widget.toggleEnabled,
       size: widget.toggleItemSize,
-      controller: _controller!,
+      controller: _controller,
       body: widget.itemBuilder(
         context,
         item,
@@ -313,7 +313,7 @@ class _GroupedToggleScrollViewState<T, H>
     if (widget.toggleController != oldWidget.toggleController) {
       if (null != widget.toggleController) {
         oldWidget.toggleController?.dispose();
-        _controller = widget.toggleController;
+        _controller = widget.toggleController!;
       }
     }
     super.didUpdateWidget(oldWidget);
@@ -321,7 +321,7 @@ class _GroupedToggleScrollViewState<T, H>
 
   @override
   void dispose() {
-    _controller?.dispose();
+    _controller.dispose();
     super.dispose();
   }
 }

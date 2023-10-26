@@ -11,9 +11,13 @@ class GroupedToggleStyle {
   /// An color to use on this toggle's parent when the toggle is on.
   final Color? activeContainerColor;
 
+  /// Whether this widget absorbs pointers during hit testing.
+  final bool absorbChildPointer;
+
   const GroupedToggleStyle({
     this.activeWidget,
     this.activeContainerColor,
     this.toggleType = GroupedToggleType.checkbox,
+    this.absorbChildPointer = true,
   });
 }
