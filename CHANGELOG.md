@@ -1,3 +1,7 @@
+## 0.1.0
+
+* add absorbChildPointer option for toggle mode
+
 ## 0.0.10
 
 * upgrade sliver_tools to 0.2.12
