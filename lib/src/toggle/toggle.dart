@@ -14,14 +14,13 @@ class ToggleContainer extends StatefulWidget {
   final Size? size;
   final bool toggleEnabled;
 
-  const ToggleContainer({
-    super.key,
-    required this.controller,
-    required this.body,
-    required this.index,
-    required this.toggleEnabled,
-    this.size
-  });
+  const ToggleContainer(
+      {super.key,
+      required this.controller,
+      required this.body,
+      required this.index,
+      required this.toggleEnabled,
+      this.size});
 
   @override
   State<StatefulWidget> createState() => _ToggleContainerState();
