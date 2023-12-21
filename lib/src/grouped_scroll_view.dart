@@ -298,6 +298,9 @@ class GroupedScrollView<T, H> extends StatelessWidget {
               delegate: _buildSliverChildDelegate(items, i),
               gridDelegate: gridDelegate!)
           : SliverList(delegate: _buildSliverChildDelegate(items, i)));
+      if (options.sectionFooterBuilder != null) {
+        section.add(options.sectionFooterBuilder!(context, header, i));
+      }
       if (groups - 1 == i && null != footerBuilder) {
         section.add(footerBuilder!(context));
       }
