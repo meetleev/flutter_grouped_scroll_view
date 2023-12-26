@@ -8,10 +8,15 @@ class GroupedScrollViewOptions<T, H> {
   final Widget Function(BuildContext context, H header, int groupedIndex)
       stickyHeaderBuilder;
 
+  /// sectionFooterBuilder
+  final Widget Function(BuildContext context, H header, int groupedIndex)?
+      sectionFooterBuilder;
+
   /// itemGrouper
   final H Function(T item) itemGrouper;
   GroupedScrollViewOptions(
       {required this.stickyHeaderBuilder,
+      this.sectionFooterBuilder,
       required this.itemGrouper,
       this.stickyHeaderSorter});
 }
