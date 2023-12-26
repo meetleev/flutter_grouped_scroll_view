@@ -1,3 +1,7 @@
+## 0.1.1
+
+* Added sectionFooterBuilder option for adding section footers.
+
 ## 0.1.0
 
 * add absorbChildPointer option for toggle mode

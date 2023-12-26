@@ -37,13 +37,17 @@ class GroupedScrollViewTestPage extends StatelessWidget {
                   (BuildContext context, int year, int groupedIndex) =>
                       Container(
                         color: Colors.white,
-                        padding: const EdgeInsets.all(8),
+                        alignment: Alignment.centerLeft,
+                        padding: const EdgeInsets.only(left: 8),
                         constraints: const BoxConstraints.tightFor(height: 30),
                         child: Text(
                           '$year',
                           style: const TextStyle(fontWeight: FontWeight.bold),
                         ),
-                      ))
+                      ),
+              sectionFooterBuilder:
+                  (BuildContext cxt, int year, int groupedIndex) =>
+                      _buildSectionFooter(cxt, year, groupedIndex))
           : null,
       itemBuilder: (BuildContext context, Person item) {
         return Container(
@@ -120,13 +124,17 @@ class GroupedScrollViewTestPage extends StatelessWidget {
                   (BuildContext context, int year, int groupedIndex) =>
                       Container(
                         color: Colors.white,
-                        padding: const EdgeInsets.all(8),
+                        alignment: Alignment.centerLeft,
+                        padding: const EdgeInsets.only(left: 8),
                         constraints: const BoxConstraints.tightFor(height: 30),
                         child: Text(
                           '$year',
                           style: const TextStyle(fontWeight: FontWeight.bold),
                         ),
-                      ))
+                      ),
+              sectionFooterBuilder:
+                  (BuildContext cxt, int year, int groupedIndex) =>
+                      _buildSectionFooter(cxt, year, groupedIndex))
           : null,
       itemBuilder: (BuildContext context, Person item) {
         return Container(
@@ -172,6 +180,19 @@ class GroupedScrollViewTestPage extends StatelessWidget {
             thickness: 5,
           ),
         ],
+      ),
+    );
+  }
+
+  Widget _buildSectionFooter(BuildContext cxt, int year, int groupedIndex) {
+    return Container(
+      color: Colors.white,
+      constraints: const BoxConstraints.tightFor(height: 30),
+      child: Center(
+        child: Text(
+          'SectionFooter - $year',
+          style: const TextStyle(fontWeight: FontWeight.bold),
+        ),
       ),
     );
   }

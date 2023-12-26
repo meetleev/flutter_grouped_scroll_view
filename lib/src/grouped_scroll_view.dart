@@ -106,7 +106,7 @@ class GroupedScrollView<T, H> extends StatelessWidget {
   final GroupedScrollViewOptions<T, H>? groupedOptions;
 
   const GroupedScrollView({
-    Key? key,
+    super.key,
     required this.data,
     this.headerBuilder,
     this.footerBuilder,
@@ -147,7 +147,7 @@ class GroupedScrollView<T, H> extends StatelessWidget {
     this.keyboardDismissBehavior = ScrollViewKeyboardDismissBehavior.manual,
     this.restorationId,
     this.clipBehavior = Clip.hardEdge,
-  }) : super(key: key);
+  });
 
   const GroupedScrollView.grid({
     super.key,

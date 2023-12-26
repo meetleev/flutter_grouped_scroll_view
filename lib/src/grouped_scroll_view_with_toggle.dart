@@ -103,7 +103,7 @@ class GroupedScrollViewWithToggle<T, H> extends StatefulWidget {
   final bool toggleEnabled;
 
   const GroupedScrollViewWithToggle({
-    Key? key,
+    super.key,
     required this.data,
     this.headerBuilder,
     this.footerBuilder,
@@ -148,7 +148,7 @@ class GroupedScrollViewWithToggle<T, H> extends StatefulWidget {
     this.toggleController,
     this.toggleItemSize,
     this.toggleEnabled = false,
-  }) : super(key: key);
+  });
 
   const GroupedScrollViewWithToggle.grid({
     super.key,
