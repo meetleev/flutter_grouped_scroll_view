@@ -16,17 +16,6 @@
 * upgrade sliver_tools to 0.2.12
 * upgrade collection to 1.17.1
 
-## 0.0.9+3
-
-* upgrade sliver_tools to 0.2.10
-* Aligns Dart and Flutter SDK constraints.
-
-
-## 0.0.9+2
-
-* upgrade sliver_tools to 0.2.9
-* upgrade collection to 1.17.0
-
 ## 0.0.9
 
 * add ItemAtIndex callback used to return grouped index.
@@ -34,10 +23,6 @@
 ## 0.0.8+5
 
 * remove toggleController dispose on toggle_test when the widget dispose .
-
-## 0.0.8+4
-
-* update readme.md.
 
 ## 0.0.8+1
 
@@ -56,10 +41,6 @@
 * Supports checkbox or radio in a list
 * Supports normal list/grid
 * Supports custom toggleStyle of selected
-
-## 0.0.3
-
-* update readme.md.
 
 ## 0.0.2
 
