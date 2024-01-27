@@ -1,3 +1,8 @@
+## 0.1.2
+
+* absorbChildPointer only takes effect when toggleEnabled on toggle mode
+* rewrite default selected widget
+
 ## 0.1.1
 
 * Added sectionFooterBuilder option for adding section footers.

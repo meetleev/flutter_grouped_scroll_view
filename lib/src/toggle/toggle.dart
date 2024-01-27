@@ -14,13 +14,12 @@ class ToggleContainer extends StatefulWidget {
   final Size? size;
   final bool toggleEnabled;
 
-  const ToggleContainer(
-      {super.key,
-      required this.controller,
-      required this.body,
-      required this.index,
-      required this.toggleEnabled,
-      this.size});
+  const ToggleContainer({super.key,
+    required this.controller,
+    required this.body,
+    required this.index,
+    required this.toggleEnabled,
+    this.size});
 
   @override
   State<StatefulWidget> createState() => _ToggleContainerState();
@@ -49,49 +48,49 @@ class _ToggleContainerState extends State<ToggleContainer> {
   Widget build(BuildContext context) {
     return LayoutBuilder(
         builder: (BuildContext context, BoxConstraints constraints) {
-      _Toggle? toggle;
-      return GestureDetector(
-        onTap: () =>
+          _Toggle? toggle;
+          return GestureDetector(
+            onTap: () =>
             widget.toggleEnabled ? _onSelected(toggle!, widget.index) : {},
-        child: AbsorbPointer(
-            absorbing: _toggleStyle.absorbChildPointer,
-            // absorbing: widget.toggleEnabled,
-            child: Stack(
-              children: [
-                widget.body,
-                AnimatedBuilder(
-                    animation: _controller,
-                    builder: (BuildContext __, Widget? _) {
-                      bool isChecked = widget.controller.selectedIndexes
-                          .contains(widget.index);
-                      toggle = _Toggle(
-                        key: widget.key,
-                        isChecked: isChecked,
-                        activeWidget: _toggleStyle.activeWidget,
-                      );
-                      return isChecked
-                          ? _selectedBuilder(constraints, toggle!)
-                          : toggle!;
-                    }),
-              ],
-            )),
-      );
-    });
+            child: AbsorbPointer(
+                absorbing: widget.toggleEnabled &&
+                    _toggleStyle.absorbChildPointer,
+                child: Stack(
+                  children: [
+                    widget.body,
+                    AnimatedBuilder(
+                        animation: _controller,
+                        builder: (BuildContext __, Widget? _) {
+                          bool isChecked = widget.controller.selectedIndexes
+                              .contains(widget.index);
+                          toggle = _Toggle(
+                            key: widget.key,
+                            isChecked: isChecked,
+                            activeWidget: _toggleStyle.activeWidget,
+                          );
+                          return isChecked
+                              ? _selectedBuilder(constraints, toggle!)
+                              : toggle!;
+                        }),
+                  ],
+                )),
+          );
+        });
   }
 
   _selectedBuilder(BoxConstraints constraints, _Toggle toggle) {
     final Color activeContainerColor =
-        _toggleStyle.activeContainerColor ?? Colors.blue.withOpacity(0.5);
+        _toggleStyle.activeContainerColor ?? Colors.blue.withOpacity(0.3);
     return Container(
       width: (null == _bodySize)
           ? (constraints.hasTightWidth
-              ? constraints.maxWidth
-              : _defaultListSize)
+          ? constraints.maxWidth
+          : _defaultListSize)
           : _bodySize?.width,
       height: (null == _bodySize)
           ? (constraints.hasTightHeight
-              ? constraints.maxHeight
-              : _defaultListSize)
+          ? constraints.maxHeight
+          : _defaultListSize)
           : _bodySize?.height,
       decoration: BoxDecoration(color: activeContainerColor),
       child: toggle,
@@ -136,15 +135,12 @@ class _Toggle extends StatelessWidget {
   Widget build(BuildContext context) {
     return isChecked
         ? (activeWidget ??
-            Positioned(
-                left: 5,
-                top: 5,
-                child: Container(
-                  decoration: const BoxDecoration(color: Colors.blue),
-                  constraints:
-                      const BoxConstraints.tightFor(height: 25, width: 25),
-                  child: const Icon(Icons.check),
-                )))
+        Align(alignment: Alignment.topLeft,
+          child: Container(decoration: const BoxDecoration(color: Colors.blue),
+            constraints:
+            const BoxConstraints.expand(height: 25, width: 25),
+            child: const Icon(Icons.check),),
+        ))
         : Container();
   }
 }
