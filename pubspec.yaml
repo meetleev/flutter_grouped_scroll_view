@@ -3,7 +3,10 @@ description: Provide a List, a grouper, and let it display it as a ListView, a G
 version: 0.1.2
 homepage: https://github.com/meetleev
 repository: https://github.com/meetleev/flutter_grouped_scroll_view
-
+topics:
+  - grouped
+  - list
+  - gridview
 environment:
   sdk: ">=2.18.0 <4.0.0"
   flutter: ">=3.3.0"
