@@ -1,3 +1,7 @@
+## 0.1.3
+
+* added topics
+
 ## 0.1.2
 
 * absorbChildPointer only takes effect when toggleEnabled on toggle mode

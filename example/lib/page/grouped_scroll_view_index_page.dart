@@ -17,7 +17,7 @@ class _GroupedScrollViewIndexTestPageState
   late int _curGroupedIndex = 0;
   late int _groupedItemIndex = 0;
 
-  _calculateAccumulatedItemIndex() {
+  int _calculateAccumulatedItemIndex() {
     int index = 0;
     for (int i = 0; i < _curGroupedIndex; i++) {
       if (_groupedTotalMap.containsKey(i)) {
