@@ -1,6 +1,7 @@
-## 0.1.4
+## 0.1.5
 
 * removed 'toggleItemSize' on toggle mode, automatically calculate the size with sizebox
+* removed 'activeWidget' on toggle mode, use 'activeWidgetBuilder' instead.
 * fixed some bugs
 
 ## 0.1.3

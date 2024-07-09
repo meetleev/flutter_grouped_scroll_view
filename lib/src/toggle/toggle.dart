@@ -61,9 +61,9 @@ class _ToggleContainerState extends State<ToggleContainer> {
                     bool isChecked = widget.controller.selectedIndexes
                         .contains(widget.index);
                     toggle = _Toggle(
-                      key: widget.key,
+                      index: widget.index,
                       isChecked: isChecked,
-                      activeWidget: _toggleStyle.activeWidget,
+                      activeWidgetBuilder: _toggleStyle.activeWidgetBuilder,
                     );
                     return isChecked ? _selectedBuilder(toggle!) : toggle!;
                   }),
@@ -136,29 +136,31 @@ class _ToggleContainerState extends State<ToggleContainer> {
 }
 
 class _Toggle extends StatelessWidget {
+  /// The index to use on this toggle
+  final int index;
   final bool isChecked;
 
-  /// An widget to use on this toggle when the toggle is on.
-  final Widget? activeWidget;
+  /// Th builder to use on this toggle when the toggle is on.
+  final Widget Function(int)? activeWidgetBuilder;
 
-  const _Toggle({
-    super.key,
-    required this.isChecked,
-    this.activeWidget,
-  });
+  const _Toggle(
+      {required this.index, required this.isChecked, this.activeWidgetBuilder});
 
   @override
   Widget build(BuildContext context) {
-    return isChecked
-        ? (activeWidget ??
-            Align(
-              alignment: Alignment.bottomRight,
-              child: Container(
-                decoration: const BoxDecoration(color: Colors.blue),
-                constraints: const BoxConstraints.expand(height: 25, width: 25),
-                child: const Icon(Icons.check),
-              ),
-            ))
-        : const SizedBox.shrink();
+    if (isChecked) {
+      if (null != activeWidgetBuilder) {
+        return activeWidgetBuilder!(index);
+      }
+      return Align(
+        alignment: Alignment.bottomRight,
+        child: Container(
+          decoration: const BoxDecoration(color: Colors.blue),
+          constraints: const BoxConstraints.expand(height: 25, width: 25),
+          child: const Icon(Icons.check),
+        ),
+      );
+    }
+    return const SizedBox.shrink();
   }
 }

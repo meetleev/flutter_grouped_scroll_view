@@ -8,8 +8,8 @@ class GroupedToggleStyle {
   /// How to align the child.
   final AlignmentGeometry toggleAlignment;
 
-  /// An widget to use on this toggle when the toggle is on.
-  final Widget? activeWidget;
+  /// The builder to use on this toggle when the toggle is on.
+  final Widget Function(int index)? activeWidgetBuilder;
 
   /// An color to use on this toggle's parent when the toggle is on.
   final Color? activeContainerColor;
@@ -18,7 +18,7 @@ class GroupedToggleStyle {
   final bool absorbChildPointer;
 
   const GroupedToggleStyle(
-      {this.activeWidget,
+      {this.activeWidgetBuilder,
       this.activeContainerColor,
       this.toggleType = GroupedToggleType.checkbox,
       this.absorbChildPointer = true,

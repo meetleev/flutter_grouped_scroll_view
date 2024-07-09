@@ -58,9 +58,9 @@ class _GroupedScrollViewWithToggleTestPageState
         selectedIndexes: [0],
         toggleStyle: GroupedToggleStyle(
             toggleType: widget.toggleType!,
-            activeWidget: 0 < widget.crossAxisCount
+            activeWidgetBuilder: 0 < widget.crossAxisCount
                 ? null
-                : Align(
+                : (_) => Align(
                     alignment: Alignment.topRight,
                     child: Container(
                       decoration: const BoxDecoration(color: Colors.blue),
