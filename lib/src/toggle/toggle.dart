@@ -44,8 +44,8 @@ class _ToggleContainerState extends State<ToggleContainer> {
 
   @override
   Widget build(BuildContext context) {
-    WidgetsBinding.instance.addPostFrameCallback(_postFrameCallback);
     _Toggle? toggle;
+    WidgetsBinding.instance.addPostFrameCallback((_) => _postFrameCallback());
     return GestureDetector(
       onTap: () =>
           widget.toggleEnabled ? _onSelected(toggle!, widget.index) : {},
@@ -54,7 +54,13 @@ class _ToggleContainerState extends State<ToggleContainer> {
           child: Stack(
             alignment: _toggleStyle.toggleAlignment,
             children: [
-              SizedBox(key: _bodyKey, child: widget.body),
+              NotificationListener<SizeChangedLayoutNotification>(
+                  onNotification: (SizeChangedLayoutNotification n) {
+                    _postFrameCallback();
+                    return true;
+                  },
+                  child: SizeChangedLayoutNotifier(
+                      key: _bodyKey, child: widget.body)),
               AnimatedBuilder(
                   animation: _controller,
                   builder: (BuildContext __, Widget? _) {
@@ -111,7 +117,7 @@ class _ToggleContainerState extends State<ToggleContainer> {
     _controller.onToggleChanged?.call(idx, !toggle.isChecked);
   }
 
-  void _postFrameCallback(_) {
+  void _postFrameCallback() {
     final context = _bodyKey.currentContext;
     if (context == null) return;
 
