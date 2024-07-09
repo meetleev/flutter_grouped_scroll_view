@@ -1,6 +1,6 @@
 name: grouped_scroll_view
 description: Provide a List, a grouper, and let it display it as a ListView, a GridView or anything else. Supports checkbox or radio in a scrollView.
-version: 0.1.3
+version: 0.1.4
 homepage: https://github.com/meetleev
 repository: https://github.com/meetleev/flutter_grouped_scroll_view
 topics:
@@ -23,7 +23,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
-  flutter_lints: ^3.0.2
+  flutter_lints: ^4.0.0
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

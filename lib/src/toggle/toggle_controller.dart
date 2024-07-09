@@ -22,9 +22,12 @@ class GroupedToggleController extends ChangeNotifier {
 
   /// selected index on only single type
   radioSelected(int index) {
-    _selectedIndexes.clear();
-    _selectedIndexes.add(index);
-    notifyListeners();
+    int first = _selectedIndexes.isNotEmpty? _selectedIndexes.first:-1;
+    if (index != first) {
+      _selectedIndexes.clear();
+      _selectedIndexes.add(index);
+      notifyListeners();
+    }
   }
 
   /// selected index

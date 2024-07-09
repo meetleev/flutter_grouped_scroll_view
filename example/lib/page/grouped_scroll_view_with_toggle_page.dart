@@ -29,6 +29,7 @@ class _GroupedScrollViewWithToggleTestPageState
     extends State<GroupedScrollViewWithToggleTestPage> {
   GroupedToggleController? _toggleController;
   bool _toggleEnabled = true;
+  final Size _itemSize = const Size(100, 50);
 
   @override
   void initState() {
@@ -51,22 +52,16 @@ class _GroupedScrollViewWithToggleTestPageState
     );
   }
 
-  @override
-  void dispose() {
-    _toggleController = null;
-    super.dispose();
-  }
-
   void _buildController() {
     if (null != widget.toggleType) {
       _toggleController ??= GroupedToggleController(
+        selectedIndexes: [0],
         toggleStyle: GroupedToggleStyle(
             toggleType: widget.toggleType!,
             activeWidget: 0 < widget.crossAxisCount
                 ? null
-                : Positioned(
-                    right: 5,
-                    top: 5,
+                : Align(
+                    alignment: Alignment.topRight,
                     child: Container(
                       decoration: const BoxDecoration(color: Colors.blue),
                       constraints:
@@ -115,11 +110,12 @@ class _GroupedScrollViewWithToggleTestPageState
     );
   }
 
-  _buildGridView() {
+  Widget _buildGridView() {
     return GroupedScrollViewWithToggle.grid(
       gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
           mainAxisSpacing: 5,
           crossAxisSpacing: 5,
+          childAspectRatio: 2 / 1,
           crossAxisCount: widget.crossAxisCount),
       groupedOptions: widget.grouped
           ? GroupedScrollViewOptions(
@@ -140,15 +136,15 @@ class _GroupedScrollViewWithToggleTestPageState
           : null,
       itemBuilder: (BuildContext context, Person item) {
         return Container(
-          color: Colors.lightGreen,
-          padding: const EdgeInsets.all(8),
-          child: Center(
-            child: Text(
-              item.name,
-              style: const TextStyle(fontWeight: FontWeight.bold),
-            ),
-          ),
-        );
+                color: Colors.lightGreen,
+                width: _itemSize.width,
+                height: _itemSize.height,
+                child: Center(
+                  child: Text(
+                    item.name,
+                    style: const TextStyle(fontWeight: FontWeight.bold)
+                  )
+                ));
       },
       data: DataCache.instance.persons,
       headerBuilder: (BuildContext context) => _toggleEnabled
@@ -190,7 +186,7 @@ class _GroupedScrollViewWithToggleTestPageState
     );
   }
 
-  _buildListView() {
+  Widget _buildListView() {
     return GroupedScrollViewWithToggle.list(
       groupedOptions: widget.grouped
           ? GroupedScrollViewOptions(
@@ -210,7 +206,7 @@ class _GroupedScrollViewWithToggleTestPageState
                       ))
           : null,
       itemBuilder: (BuildContext context, Person item) {
-        return Container(
+        return ConstrainedBox(
           constraints: const BoxConstraints.expand(height: 35),
           child: Column(
             children: [

@@ -96,9 +96,6 @@ class GroupedScrollViewWithToggle<T, H> extends StatefulWidget {
   /// toggleController on edit mode.
   final GroupedToggleController? toggleController;
 
-  /// The toggleItemSize is used for the size of the checkbox container in the list.
-  final Size? toggleItemSize;
-
   /// If true, open edit mode. Default false;
   final bool toggleEnabled;
 
@@ -146,7 +143,6 @@ class GroupedScrollViewWithToggle<T, H> extends StatefulWidget {
 
     /// toggle
     this.toggleController,
-    this.toggleItemSize,
     this.toggleEnabled = false,
   });
 
@@ -190,8 +186,7 @@ class GroupedScrollViewWithToggle<T, H> extends StatefulWidget {
     this.keyboardDismissBehavior = ScrollViewKeyboardDismissBehavior.manual,
     this.restorationId,
     this.clipBehavior = Clip.hardEdge,
-  })  : separatorBuilder = null,
-        toggleItemSize = null;
+  }) : separatorBuilder = null;
 
   const GroupedScrollViewWithToggle.list({
     super.key,
@@ -207,7 +202,6 @@ class GroupedScrollViewWithToggle<T, H> extends StatefulWidget {
 
     /// toggle
     this.toggleController,
-    this.toggleItemSize,
     this.toggleEnabled = false,
 
     /// SliverChildBuilderDelegate
@@ -293,12 +287,8 @@ class _GroupedToggleScrollViewState<T, H>
   Widget _itemBuilder(BuildContext context, T item) {
     return ToggleContainer(
       toggleEnabled: widget.toggleEnabled,
-      size: widget.toggleItemSize,
       controller: _controller,
-      body: widget.itemBuilder(
-        context,
-        item,
-      ),
+      body: widget.itemBuilder(context, item),
       index: widget.data.indexOf(item),
     );
   }

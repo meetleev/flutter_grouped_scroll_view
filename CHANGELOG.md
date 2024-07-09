@@ -1,3 +1,8 @@
+## 0.1.4
+
+* removed 'toggleItemSize' on toggle mode, automatically calculate the size with sizebox
+* fixed some bugs
+
 ## 0.1.3
 
 * added topics

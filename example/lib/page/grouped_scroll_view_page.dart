@@ -139,7 +139,6 @@ class GroupedScrollViewTestPage extends StatelessWidget {
       itemBuilder: (BuildContext context, Person item) {
         return Container(
           color: Colors.lightGreen,
-          padding: const EdgeInsets.all(8),
           child: Center(
             child: Text(
               item.name,

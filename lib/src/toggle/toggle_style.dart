@@ -5,6 +5,9 @@ class GroupedToggleStyle {
   /// toggleType used to toggle. Default [GroupedToggleType.checkbox].
   final GroupedToggleType toggleType;
 
+  /// How to align the child.
+  final AlignmentGeometry toggleAlignment;
+
   /// An widget to use on this toggle when the toggle is on.
   final Widget? activeWidget;
 
@@ -19,5 +22,6 @@ class GroupedToggleStyle {
     this.activeContainerColor,
     this.toggleType = GroupedToggleType.checkbox,
     this.absorbChildPointer = true,
+    this.toggleAlignment = Alignment.center
   });
 }
