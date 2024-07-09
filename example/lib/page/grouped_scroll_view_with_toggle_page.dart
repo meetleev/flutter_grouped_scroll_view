@@ -136,15 +136,12 @@ class _GroupedScrollViewWithToggleTestPageState
           : null,
       itemBuilder: (BuildContext context, Person item) {
         return Container(
-                color: Colors.lightGreen,
-                width: _itemSize.width,
-                height: _itemSize.height,
-                child: Center(
-                  child: Text(
-                    item.name,
-                    style: const TextStyle(fontWeight: FontWeight.bold)
-                  )
-                ));
+            color: Colors.lightGreen,
+            width: _itemSize.width,
+            height: _itemSize.height,
+            child: Center(
+                child: Text(item.name,
+                    style: const TextStyle(fontWeight: FontWeight.bold))));
       },
       data: DataCache.instance.persons,
       headerBuilder: (BuildContext context) => _toggleEnabled

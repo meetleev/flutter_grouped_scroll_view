@@ -17,11 +17,10 @@ class GroupedToggleStyle {
   /// default true, Whether this widget absorbs pointers during hit testing. Only toggleEnabled set true and takes effect
   final bool absorbChildPointer;
 
-  const GroupedToggleStyle({
-    this.activeWidget,
-    this.activeContainerColor,
-    this.toggleType = GroupedToggleType.checkbox,
-    this.absorbChildPointer = true,
-    this.toggleAlignment = Alignment.center
-  });
+  const GroupedToggleStyle(
+      {this.activeWidget,
+      this.activeContainerColor,
+      this.toggleType = GroupedToggleType.checkbox,
+      this.absorbChildPointer = true,
+      this.toggleAlignment = Alignment.center});
 }

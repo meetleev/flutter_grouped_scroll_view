@@ -65,16 +65,14 @@ class _ToggleContainerState extends State<ToggleContainer> {
                       isChecked: isChecked,
                       activeWidget: _toggleStyle.activeWidget,
                     );
-                    return isChecked
-                        ? _selectedBuilder( toggle!)
-                        : toggle!;
+                    return isChecked ? _selectedBuilder(toggle!) : toggle!;
                   }),
             ],
           )),
     );
   }
 
-  Widget _selectedBuilder( _Toggle toggle) {
+  Widget _selectedBuilder(_Toggle toggle) {
     final Color activeContainerColor =
         _toggleStyle.activeContainerColor ?? Colors.blue.withOpacity(0.3);
     return ValueListenableBuilder(
@@ -124,7 +122,7 @@ class _ToggleContainerState extends State<ToggleContainer> {
     }
   }
 
- @override
+  @override
   void dispose() {
     _bodySizeValue.dispose();
     super.dispose();
