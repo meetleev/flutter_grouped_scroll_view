@@ -10,6 +10,7 @@ class GroupedScrollViewWithToggleTestPage extends StatefulWidget {
   final bool grouped;
   final bool editModeTest;
   final bool separated;
+  final bool isToggleStacked;
 
   const GroupedScrollViewWithToggleTestPage(
       {super.key,
@@ -18,7 +19,8 @@ class GroupedScrollViewWithToggleTestPage extends StatefulWidget {
       this.toggleType,
       this.grouped = true,
       this.editModeTest = false,
-      this.separated = false});
+      this.separated = false,
+      this.isToggleStacked = true});
 
   @override
   State<GroupedScrollViewWithToggleTestPage> createState() =>
@@ -41,7 +43,6 @@ class _GroupedScrollViewWithToggleTestPageState
   @override
   void didChangeDependencies() {
     super.didChangeDependencies();
-    _buildController();
   }
 
   @override
@@ -57,17 +58,7 @@ class _GroupedScrollViewWithToggleTestPageState
       _toggleController ??= GroupedToggleController(
         selectedIndexes: [0],
         toggleStyle: GroupedToggleStyle(
-            toggleType: widget.toggleType!,
-            activeWidgetBuilder: 0 < widget.crossAxisCount
-                ? null
-                : (_) => Align(
-                    alignment: Alignment.topRight,
-                    child: Container(
-                      decoration: const BoxDecoration(color: Colors.blue),
-                      constraints:
-                          const BoxConstraints.tightFor(height: 25, width: 25),
-                      child: const Icon(Icons.check),
-                    ))),
+            isStacked: widget.isToggleStacked, toggleType: widget.toggleType!),
         onToggleChanged: (int idx, bool selected) {
           if (kDebugMode) {
             print(
@@ -220,6 +211,35 @@ class _GroupedScrollViewWithToggleTestPageState
             ],
           ),
         );
+      },
+      itemSelectedBuilder: (context, item) {
+        if (!widget.isToggleStacked) {
+          return ConstrainedBox(
+            constraints: const BoxConstraints.expand(height: 35),
+            child: Column(
+              children: [
+                Container(
+                  constraints: const BoxConstraints.expand(height: 30),
+                  color: Colors.green,
+                  child: Center(
+                    child: Text(
+                      item.name,
+                      style: const TextStyle(
+                          fontWeight: FontWeight.bold, color: Colors.white),
+                    ),
+                  ),
+                ), //SizedBox(height: 5,)
+              ],
+            ),
+          );
+        }
+        return Align(
+            alignment: Alignment.topRight,
+            child: Container(
+              // decoration: const BoxDecoration(color: Colors.blue),
+              constraints: const BoxConstraints.tightFor(height: 25, width: 25),
+              child: const Icon(Icons.check),
+            ));
       },
       data: DataCache.instance.persons,
       headerBuilder: (BuildContext context) => const Column(

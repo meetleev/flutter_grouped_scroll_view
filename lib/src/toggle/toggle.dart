@@ -7,14 +7,16 @@ typedef OnToggleChanged = void Function(int idx, bool isChecked);
 
 class ToggleContainer extends StatefulWidget {
   final GroupedToggleController controller;
-  final Widget body;
+  final Widget normal;
+  final Widget? selected;
   final int index;
   final bool toggleEnabled;
 
   const ToggleContainer(
       {super.key,
       required this.controller,
-      required this.body,
+      required this.normal,
+      this.selected,
       required this.index,
       required this.toggleEnabled});
 
@@ -27,6 +29,7 @@ class _ToggleContainerState extends State<ToggleContainer> {
   late GroupedToggleStyle _toggleStyle;
   final ValueNotifier<Size> _bodySizeValue = ValueNotifier(Size.zero);
   final GlobalKey _bodyKey = GlobalKey();
+  bool _isSelected = false;
 
   @override
   void initState() {
@@ -44,56 +47,72 @@ class _ToggleContainerState extends State<ToggleContainer> {
 
   @override
   Widget build(BuildContext context) {
-    _Toggle? toggle;
-    WidgetsBinding.instance.addPostFrameCallback((_) => _postFrameCallback());
-    return GestureDetector(
-      onTap: () =>
-          widget.toggleEnabled ? _onSelected(toggle!, widget.index) : {},
-      child: AbsorbPointer(
-          absorbing: widget.toggleEnabled && _toggleStyle.absorbChildPointer,
-          child: Stack(
-            alignment: _toggleStyle.toggleAlignment,
-            children: [
-              NotificationListener<SizeChangedLayoutNotification>(
-                  onNotification: (SizeChangedLayoutNotification n) {
-                    _postFrameCallback();
-                    return true;
-                  },
-                  child: SizeChangedLayoutNotifier(
-                      key: _bodyKey, child: widget.body)),
-              AnimatedBuilder(
-                  animation: _controller,
-                  builder: (BuildContext __, Widget? _) {
-                    bool isChecked = widget.controller.selectedIndexes
-                        .contains(widget.index);
-                    toggle = _Toggle(
-                      index: widget.index,
-                      isChecked: isChecked,
-                      activeWidgetBuilder: _toggleStyle.activeWidgetBuilder,
-                    );
-                    return isChecked ? _selectedBuilder(toggle!) : toggle!;
-                  }),
-            ],
-          )),
-    );
+    return _toggleStyle.isStacked ? _buildStacked() : _buildStateContainer();
   }
 
-  Widget _selectedBuilder(_Toggle toggle) {
-    final Color activeContainerColor =
-        _toggleStyle.activeContainerColor ?? Colors.blue.withOpacity(0.3);
+  Widget _buildStateContainer() {
+    _Toggle? toggle;
+    return GestureDetector(
+        onTap: () => widget.toggleEnabled ? _onSelected() : {},
+        child: AbsorbPointer(
+            absorbing: widget.toggleEnabled && _toggleStyle.absorbChildPointer,
+            child: Container(
+              alignment: _toggleStyle.toggleAlignment,
+              child: AnimatedBuilder(
+                  animation: _controller,
+                  builder: (BuildContext __, Widget? _) {
+                    _isSelected = widget.controller.selectedIndexes
+                        .contains(widget.index);
+                    toggle = _Toggle(
+                        isChecked: _isSelected,
+                        selected: widget.selected,
+                        normal: widget.normal);
+                    return toggle!;
+                  }),
+            )));
+  }
+
+  Widget _buildStacked() {
+    WidgetsBinding.instance.addPostFrameCallback((_) => _postFrameCallback());
+    return GestureDetector(
+        onTap: () => widget.toggleEnabled ? _onSelected() : {},
+        child: AbsorbPointer(
+            absorbing: widget.toggleEnabled && _toggleStyle.absorbChildPointer,
+            child: Stack(
+              alignment: _toggleStyle.toggleAlignment,
+              children: [
+                NotificationListener<SizeChangedLayoutNotification>(
+                    onNotification: (SizeChangedLayoutNotification n) {
+                      WidgetsBinding.instance
+                          .addPostFrameCallback((_) => _postFrameCallback());
+                      return true;
+                    },
+                    child: SizeChangedLayoutNotifier(
+                        key: _bodyKey, child: widget.normal)),
+                AnimatedBuilder(
+                    animation: _controller,
+                    builder: (BuildContext __, Widget? _) {
+                      _isSelected = widget.controller.selectedIndexes
+                          .contains(widget.index);
+                      return _buildStackedSelectedBuilder(_Toggle(
+                        isChecked: _isSelected,
+                        selected: widget.selected,
+                      ));
+                    }),
+              ],
+            )));
+  }
+
+  Widget _buildStackedSelectedBuilder(_Toggle toggle) {
     return ValueListenableBuilder(
       valueListenable: _bodySizeValue,
       builder: (BuildContext context, Size value, Widget? child) {
-        if (value.isEmpty) {
-          return DecoratedBox(
-              decoration: BoxDecoration(color: activeContainerColor),
-              child: toggle);
-        }
-        return Container(
-            width: _bodySizeValue.value.width,
-            height: _bodySizeValue.value.height,
-            decoration: BoxDecoration(color: activeContainerColor),
-            child: toggle);
+        return value.isEmpty
+            ? toggle
+            : SizedBox(
+                width: _bodySizeValue.value.width,
+                height: _bodySizeValue.value.height,
+                child: toggle);
       },
     );
   }
@@ -101,20 +120,20 @@ class _ToggleContainerState extends State<ToggleContainer> {
   void _buildController() {
     _controller = widget.controller;
     _toggleStyle = _controller.toggleStyle ?? const GroupedToggleStyle();
+    _isSelected = widget.controller.selectedIndexes.contains(widget.index);
   }
 
-  void _onSelected(_Toggle toggle, int idx) {
+  void _onSelected() {
+    int idx = widget.index;
     if (GroupedToggleType.radio == _toggleStyle.toggleType) {
-      if (toggle.isChecked) {
-        return _controller.onToggleChanged?.call(idx, toggle.isChecked);
+      if (_isSelected) {
+        return _controller.onToggleChanged?.call(idx, _isSelected);
       }
       _controller.radioSelected(idx);
     } else {
-      toggle.isChecked
-          ? _controller.unselected(idx)
-          : _controller.selected(idx);
+      _isSelected ? _controller.unselected(idx) : _controller.selected(idx);
     }
-    _controller.onToggleChanged?.call(idx, !toggle.isChecked);
+    _controller.onToggleChanged?.call(idx, _isSelected);
   }
 
   void _postFrameCallback() {
@@ -142,21 +161,22 @@ class _ToggleContainerState extends State<ToggleContainer> {
 }
 
 class _Toggle extends StatelessWidget {
-  /// The index to use on this toggle
-  final int index;
   final bool isChecked;
+  final Widget normal;
 
   /// Th builder to use on this toggle when the toggle is on.
-  final Widget Function(int)? activeWidgetBuilder;
+  final Widget? selected;
 
   const _Toggle(
-      {required this.index, required this.isChecked, this.activeWidgetBuilder});
+      {required this.isChecked,
+      this.normal = const SizedBox.shrink(),
+      this.selected});
 
   @override
   Widget build(BuildContext context) {
     if (isChecked) {
-      if (null != activeWidgetBuilder) {
-        return activeWidgetBuilder!(index);
+      if (null != selected) {
+        return selected!;
       }
       return Align(
         alignment: Alignment.bottomRight,
@@ -167,6 +187,6 @@ class _Toggle extends StatelessWidget {
         ),
       );
     }
-    return const SizedBox.shrink();
+    return normal;
   }
 }

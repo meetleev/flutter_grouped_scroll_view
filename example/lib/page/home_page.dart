@@ -104,6 +104,14 @@ class _HomePageState extends State<HomePage> {
           title: 'Radios in a list',
         ));
       }),
+      _buildExampleElementWidget('not stacked, radios in a list', () {
+        _navigateToPage(const GroupedScrollViewWithToggleTestPage(
+          grouped: false,
+          toggleType: GroupedToggleType.radio,
+          isToggleStacked: false,
+          title: 'not stacked, Radios in a list',
+        ));
+      }),
       _buildExampleElementWidget('Checkboxes in a grid', () {
         _navigateToPage(const GroupedScrollViewWithToggleTestPage(
           grouped: false,

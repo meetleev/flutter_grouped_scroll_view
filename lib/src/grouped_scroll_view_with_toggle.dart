@@ -21,6 +21,9 @@ class GroupedScrollViewWithToggle<T, H> extends StatefulWidget {
   /// itemBuilder
   final Widget Function(BuildContext context, T item) itemBuilder;
 
+  /// The builder to use on this toggle when the toggle is on.
+  final Widget Function(BuildContext context, T item)? itemSelectedBuilder;
+
   /// The delegate that controls the size and position of the children.
   final SliverGridDelegate? gridDelegate;
 
@@ -99,52 +102,52 @@ class GroupedScrollViewWithToggle<T, H> extends StatefulWidget {
   /// If true, open edit mode. Default false;
   final bool toggleEnabled;
 
-  const GroupedScrollViewWithToggle({
-    super.key,
-    required this.data,
-    this.headerBuilder,
-    this.footerBuilder,
-    required this.itemBuilder,
-    this.itemsSorter,
+  const GroupedScrollViewWithToggle(
+      {super.key,
+      required this.data,
+      this.headerBuilder,
+      this.footerBuilder,
+      required this.itemBuilder,
+      this.itemsSorter,
 
-    /// grid
-    this.gridDelegate,
+      /// grid
+      this.gridDelegate,
 
-    /// list
-    this.separatorBuilder,
+      /// list
+      this.separatorBuilder,
 
-    /// grouped
-    this.groupedOptions,
+      /// grouped
+      this.groupedOptions,
 
-    /// SliverChildBuilderDelegate
-    this.findChildIndexCallback,
-    this.addAutomaticKeepAlives = true,
-    this.addRepaintBoundaries = true,
-    this.addSemanticIndexes = true,
-    this.semanticIndexCallback = kDefaultSemanticIndexCallback,
-    this.semanticIndexOffset = 0,
+      /// SliverChildBuilderDelegate
+      this.findChildIndexCallback,
+      this.addAutomaticKeepAlives = true,
+      this.addRepaintBoundaries = true,
+      this.addSemanticIndexes = true,
+      this.semanticIndexCallback = kDefaultSemanticIndexCallback,
+      this.semanticIndexOffset = 0,
 
-    /// CustomScrollView
-    this.scrollDirection = Axis.vertical,
-    this.reverse = false,
-    this.scrollController,
-    this.primary,
-    this.physics,
-    this.scrollBehavior,
-    this.shrinkWrap = false,
-    this.center,
-    this.anchor = 0.0,
-    this.cacheExtent,
-    this.semanticChildCount,
-    this.dragStartBehavior = DragStartBehavior.start,
-    this.keyboardDismissBehavior = ScrollViewKeyboardDismissBehavior.manual,
-    this.restorationId,
-    this.clipBehavior = Clip.hardEdge,
+      /// CustomScrollView
+      this.scrollDirection = Axis.vertical,
+      this.reverse = false,
+      this.scrollController,
+      this.primary,
+      this.physics,
+      this.scrollBehavior,
+      this.shrinkWrap = false,
+      this.center,
+      this.anchor = 0.0,
+      this.cacheExtent,
+      this.semanticChildCount,
+      this.dragStartBehavior = DragStartBehavior.start,
+      this.keyboardDismissBehavior = ScrollViewKeyboardDismissBehavior.manual,
+      this.restorationId,
+      this.clipBehavior = Clip.hardEdge,
 
-    /// toggle
-    this.toggleController,
-    this.toggleEnabled = false,
-  });
+      /// toggle
+      this.toggleController,
+      this.toggleEnabled = false,
+      this.itemSelectedBuilder});
 
   const GroupedScrollViewWithToggle.grid({
     super.key,
@@ -161,6 +164,7 @@ class GroupedScrollViewWithToggle<T, H> extends StatefulWidget {
     /// toggle
     this.toggleController,
     this.toggleEnabled = false,
+    this.itemSelectedBuilder,
 
     /// SliverChildBuilderDelegate
     this.findChildIndexCallback,
@@ -203,6 +207,7 @@ class GroupedScrollViewWithToggle<T, H> extends StatefulWidget {
     /// toggle
     this.toggleController,
     this.toggleEnabled = false,
+    this.itemSelectedBuilder,
 
     /// SliverChildBuilderDelegate
     this.findChildIndexCallback,
@@ -288,7 +293,8 @@ class _GroupedToggleScrollViewState<T, H>
     return ToggleContainer(
       toggleEnabled: widget.toggleEnabled,
       controller: _controller,
-      body: widget.itemBuilder(context, item),
+      normal: widget.itemBuilder(context, item),
+      selected: widget.itemSelectedBuilder?.call(context, item),
       index: widget.data.indexOf(item),
     );
   }

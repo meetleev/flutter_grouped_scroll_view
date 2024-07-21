@@ -8,19 +8,15 @@ class GroupedToggleStyle {
   /// How to align the child.
   final AlignmentGeometry toggleAlignment;
 
-  /// The builder to use on this toggle when the toggle is on.
-  final Widget Function(int index)? activeWidgetBuilder;
-
-  /// An color to use on this toggle's parent when the toggle is on.
-  final Color? activeContainerColor;
-
   /// default true, Whether this widget absorbs pointers during hit testing. Only toggleEnabled set true and takes effect
   final bool absorbChildPointer;
 
+  /// Whether it is stacked, if it is stacked, the underlying elements are still displayed normally. Otherwise, they are not rendered.
+  final bool isStacked;
+
   const GroupedToggleStyle(
-      {this.activeWidgetBuilder,
-      this.activeContainerColor,
-      this.toggleType = GroupedToggleType.checkbox,
+      {this.toggleType = GroupedToggleType.checkbox,
       this.absorbChildPointer = true,
-      this.toggleAlignment = Alignment.center});
+      this.toggleAlignment = Alignment.center,
+      this.isStacked = true});
 }

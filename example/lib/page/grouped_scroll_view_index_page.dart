@@ -78,7 +78,6 @@ class _GroupedScrollViewIndexTestPageState
                   bottom: 5,
                   child: Container(
                     alignment: Alignment.center,
-                    height: 30,
                     child: Column(
                       children: [
                         Text(

@@ -1,3 +1,11 @@
+## 0.1.6
+
+* rewrite toggle. For example, see [grouped_scroll_view_with_toggle_page](./example/lib/page/grouped_scroll_view_with_toggle_page.dart)
+  - removed 'activeWidgetBuilder', use 'itemSelectedBuilder' instead. 
+  - removed 'activeContainerColor'
+  - added 'isStacked' option in 'ToggleStyle'. Whether it is stacked, if it is stacked, the underlying elements are still displayed normally. Otherwise, they are not rendered.
+
+
 ## 0.1.5
 
 * removed 'activeWidget' on toggle mode, use 'activeWidgetBuilder' instead.
