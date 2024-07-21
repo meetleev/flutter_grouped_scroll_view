@@ -1,4 +1,4 @@
-## 0.1.6
+## 0.2.0
 
 * rewrite toggle. For example, see [grouped_scroll_view_with_toggle_page](./example/lib/page/grouped_scroll_view_with_toggle_page.dart)
   - removed 'activeWidgetBuilder', use 'itemSelectedBuilder' instead. 
