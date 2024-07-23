@@ -242,12 +242,16 @@ class GroupedScrollViewWithToggle<T, H> extends StatefulWidget {
 
 class _GroupedToggleScrollViewState<T, H>
     extends State<GroupedScrollViewWithToggle<T, H>> {
-  late GroupedToggleController _controller;
+     GroupedToggleController? _defaultController;
+
+   GroupedToggleController get _controller=>widget.toggleController??_defaultController!;
 
   @override
   void initState() {
     super.initState();
-    _controller = widget.toggleController ?? GroupedToggleController();
+    if (null==widget.toggleController) {
+      _defaultController = GroupedToggleController();
+    }
   }
 
   @override
@@ -307,9 +311,13 @@ class _GroupedToggleScrollViewState<T, H>
   @override
   void didUpdateWidget(GroupedScrollViewWithToggle<T, H> oldWidget) {
     if (widget.toggleController != oldWidget.toggleController) {
-      if (null != widget.toggleController) {
-        oldWidget.toggleController?.dispose();
-        _controller = widget.toggleController!;
+      if (null != oldWidget.toggleController) {
+        _defaultController?.dispose();
+        _defaultController = null;
+      } else {
+        if (null == widget.toggleController){
+          _defaultController = GroupedToggleController();
+        }
       }
     }
     super.didUpdateWidget(oldWidget);
@@ -317,7 +325,7 @@ class _GroupedToggleScrollViewState<T, H>
 
   @override
   void dispose() {
-    _controller.dispose();
+    _defaultController?.dispose();
     super.dispose();
   }
 }

@@ -283,4 +283,10 @@ class _GroupedScrollViewWithToggleTestPageState
       toggleEnabled: _toggleEnabled,
     );
   }
+
+  @override
+  void dispose() {
+    _toggleController?.dispose();
+    super.dispose();
+  }
 }
