@@ -102,6 +102,9 @@ class GroupedScrollViewWithToggle<T, H> extends StatefulWidget {
   /// If true, open edit mode. Default false;
   final bool toggleEnabled;
 
+  /// used to determine whether the item can be selected
+  final bool Function(T t)? toggleSelectable;
+
   const GroupedScrollViewWithToggle(
       {super.key,
       required this.data,
@@ -147,6 +150,7 @@ class GroupedScrollViewWithToggle<T, H> extends StatefulWidget {
       /// toggle
       this.toggleController,
       this.toggleEnabled = false,
+      this.toggleSelectable,
       this.itemSelectedBuilder});
 
   const GroupedScrollViewWithToggle.grid({
@@ -165,6 +169,7 @@ class GroupedScrollViewWithToggle<T, H> extends StatefulWidget {
     this.toggleController,
     this.toggleEnabled = false,
     this.itemSelectedBuilder,
+    this.toggleSelectable,
 
     /// SliverChildBuilderDelegate
     this.findChildIndexCallback,
@@ -208,6 +213,7 @@ class GroupedScrollViewWithToggle<T, H> extends StatefulWidget {
     this.toggleController,
     this.toggleEnabled = false,
     this.itemSelectedBuilder,
+    this.toggleSelectable,
 
     /// SliverChildBuilderDelegate
     this.findChildIndexCallback,
@@ -301,6 +307,7 @@ class _GroupedToggleScrollViewState<T, H>
       normal: widget.itemBuilder(context, item),
       selected: widget.itemSelectedBuilder?.call(context, item),
       index: widget.data.indexOf(item),
+      selectable:widget.toggleSelectable?.call(item)
     );
   }
 

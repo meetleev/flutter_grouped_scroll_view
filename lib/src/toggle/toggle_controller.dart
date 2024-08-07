@@ -6,8 +6,11 @@ class GroupedToggleController extends ChangeNotifier {
   /// toggleStyle used to custom toggle.
   final GroupedToggleStyle? toggleStyle;
 
-  /// onToggleChanged used to toggle.
+  /// This callback responds when the item is changed.
   final OnToggleChanged? onToggleChanged;
+
+  /// This callback responds when the item is pressed.
+  final OnTogglePressed? onTogglePressed;
 
   final Set<int> _selectedIndexes;
 
@@ -16,7 +19,7 @@ class GroupedToggleController extends ChangeNotifier {
 
   GroupedToggleController(
       {this.toggleStyle,
-      this.onToggleChanged,
+      this.onToggleChanged, this.onTogglePressed,
       List<int> selectedIndexes = const []})
       : _selectedIndexes = selectedIndexes.toSet();
 

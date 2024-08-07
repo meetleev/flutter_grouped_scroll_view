@@ -4,6 +4,7 @@ import 'toggle_controller.dart';
 import 'toggle_type.dart';
 
 typedef OnToggleChanged = void Function(int idx, bool isChecked);
+typedef OnTogglePressed = void Function(int idx, bool selectable);
 
 class ToggleContainer extends StatefulWidget {
   final GroupedToggleController controller;
@@ -11,12 +12,13 @@ class ToggleContainer extends StatefulWidget {
   final Widget? selected;
   final int index;
   final bool toggleEnabled;
-
+  final bool? selectable;
   const ToggleContainer(
       {super.key,
       required this.controller,
       required this.normal,
       this.selected,
+      this.selectable,
       required this.index,
       required this.toggleEnabled});
 
@@ -125,6 +127,10 @@ class _ToggleContainerState extends State<ToggleContainer> {
 
   void _onSelected() {
     int idx = widget.index;
+    if (false == widget.selectable) {
+      return _controller.onTogglePressed?.call(idx, false);
+    }
+    _controller.onTogglePressed?.call(idx, true);
     if (GroupedToggleType.radio == _toggleStyle.toggleType) {
       if (_isSelected) {
         return _controller.onToggleChanged?.call(idx, _isSelected);
@@ -133,6 +139,7 @@ class _ToggleContainerState extends State<ToggleContainer> {
     } else {
       _isSelected ? _controller.unselected(idx) : _controller.selected(idx);
     }
+    _isSelected = widget.controller.selectedIndexes.contains(widget.index);
     _controller.onToggleChanged?.call(idx, _isSelected);
   }
 

@@ -1,5 +1,4 @@
 import 'package:example/test_data_cache.dart';
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:grouped_scroll_view/grouped_scroll_view.dart';
 
@@ -11,6 +10,7 @@ class GroupedScrollViewWithToggleTestPage extends StatefulWidget {
   final bool editModeTest;
   final bool separated;
   final bool isToggleStacked;
+  final bool selectableTest;
 
   const GroupedScrollViewWithToggleTestPage(
       {super.key,
@@ -20,7 +20,8 @@ class GroupedScrollViewWithToggleTestPage extends StatefulWidget {
       this.grouped = true,
       this.editModeTest = false,
       this.separated = false,
-      this.isToggleStacked = true});
+      this.isToggleStacked = true,
+      this.selectableTest = false});
 
   @override
   State<GroupedScrollViewWithToggleTestPage> createState() =>
@@ -41,11 +42,6 @@ class _GroupedScrollViewWithToggleTestPageState
   }
 
   @override
-  void didChangeDependencies() {
-    super.didChangeDependencies();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: _buildAppBar(),
@@ -60,15 +56,19 @@ class _GroupedScrollViewWithToggleTestPageState
         toggleStyle: GroupedToggleStyle(
             isStacked: widget.isToggleStacked, toggleType: widget.toggleType!),
         onToggleChanged: (int idx, bool selected) {
-          if (kDebugMode) {
-            print(
-                'GroupedScrollViewWithToggleTestPage:onToggleChanged===>idx:[$idx]--selected:[$selected]');
-          }
-          if (kDebugMode) {
-            print(
-                'GroupedScrollViewWithToggleTestPage===> all selected indexes:[${_toggleController!.selectedIndexes}]');
-          }
+          debugPrint(
+              'GroupedScrollViewWithToggleTestPage:onToggleChanged===>idx:[$idx]--selected:[$selected]');
+          debugPrint(
+              'GroupedScrollViewWithToggleTestPage===> all selected indexes:[${_toggleController!.selectedIndexes}]');
           setState(() {});
+        },
+        onTogglePressed: (idx, selectable) {
+          if (!selectable) {
+            ScaffoldMessenger.of(context)
+                .showSnackBar(const SnackBar(content: Text('Not selectable')));
+          }
+          debugPrint(
+              'GroupedScrollViewWithToggleTestPage:onTogglePressed===>idx:[$idx]--selectable:[$selectable]');
         },
       );
     }
@@ -127,12 +127,13 @@ class _GroupedScrollViewWithToggleTestPageState
           : null,
       itemBuilder: (BuildContext context, Person item) {
         return Container(
-            color: Colors.lightGreen,
-            width: _itemSize.width,
-            height: _itemSize.height,
-            child: Center(
-                child: Text(item.name,
-                    style: const TextStyle(fontWeight: FontWeight.bold))));
+          color: _toggleSelectable(item) ? Colors.lightGreen : Colors.grey,
+          width: _itemSize.width,
+          height: _itemSize.height,
+          child: Center(
+              child: Text(item.name,
+                  style: const TextStyle(fontWeight: FontWeight.bold))),
+        );
       },
       data: DataCache.instance.persons,
       headerBuilder: (BuildContext context) => _toggleEnabled
@@ -171,6 +172,7 @@ class _GroupedScrollViewWithToggleTestPageState
       ),
       toggleController: _toggleController,
       toggleEnabled: _toggleEnabled,
+      toggleSelectable: (t) => _toggleSelectable(t),
     );
   }
 
@@ -200,7 +202,8 @@ class _GroupedScrollViewWithToggleTestPageState
             children: [
               Container(
                 constraints: const BoxConstraints.expand(height: 30),
-                color: Colors.lightGreen,
+                color:
+                    _toggleSelectable(item) ? Colors.lightGreen : Colors.grey,
                 child: Center(
                   child: Text(
                     item.name,
@@ -281,6 +284,7 @@ class _GroupedScrollViewWithToggleTestPageState
           : null,
       toggleController: _toggleController,
       toggleEnabled: _toggleEnabled,
+      toggleSelectable: (t) => _toggleSelectable(t),
     );
   }
 
@@ -288,5 +292,12 @@ class _GroupedScrollViewWithToggleTestPageState
   void dispose() {
     _toggleController?.dispose();
     super.dispose();
+  }
+
+  bool _toggleSelectable(Person t) {
+    if (widget.selectableTest) {
+      return !(t.birthYear == 1990 || t.birthYear == 1992);
+    }
+    return true;
   }
 }

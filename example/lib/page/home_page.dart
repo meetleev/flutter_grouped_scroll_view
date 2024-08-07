@@ -112,10 +112,28 @@ class _HomePageState extends State<HomePage> {
           title: 'not stacked, Radios in a list',
         ));
       }),
+      _buildExampleElementWidget('selectable, radios in a list', () {
+        _navigateToPage(const GroupedScrollViewWithToggleTestPage(
+          grouped: false,
+            selectableTest: true,
+          toggleType: GroupedToggleType.radio,
+          title: 'selectable, radios in a list',
+        ));
+      }),
+      _buildExampleElementWidget('selectable, Checkboxes in a list', () {
+        _navigateToPage(const GroupedScrollViewWithToggleTestPage(
+          grouped: false,
+          selectableTest: true,
+            crossAxisCount: 3,
+          toggleType: GroupedToggleType.checkbox,
+          title: 'selectable, Checkboxes in a list',
+        ));
+      }),
       _buildExampleElementWidget('Checkboxes in a grid', () {
         _navigateToPage(const GroupedScrollViewWithToggleTestPage(
           grouped: false,
           crossAxisCount: 3,
+          selectableTest: true,
           toggleType: GroupedToggleType.checkbox,
           title: 'Checkboxes in the grid',
         ));
