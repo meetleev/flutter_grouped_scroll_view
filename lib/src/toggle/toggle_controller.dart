@@ -19,7 +19,8 @@ class GroupedToggleController extends ChangeNotifier {
 
   GroupedToggleController(
       {this.toggleStyle,
-      this.onToggleChanged, this.onTogglePressed,
+      this.onToggleChanged,
+      this.onTogglePressed,
       List<int> selectedIndexes = const []})
       : _selectedIndexes = selectedIndexes.toSet();
 

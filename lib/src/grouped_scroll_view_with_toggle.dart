@@ -302,13 +302,12 @@ class _GroupedToggleScrollViewState<T, H>
 
   Widget _itemBuilder(BuildContext context, T item) {
     return ToggleContainer(
-      toggleEnabled: widget.toggleEnabled,
-      controller: _controller,
-      normal: widget.itemBuilder(context, item),
-      selected: widget.itemSelectedBuilder?.call(context, item),
-      index: widget.data.indexOf(item),
-      selectable:widget.toggleSelectable?.call(item)
-    );
+        toggleEnabled: widget.toggleEnabled,
+        controller: _controller,
+        normal: widget.itemBuilder(context, item),
+        selected: widget.itemSelectedBuilder?.call(context, item),
+        index: widget.data.indexOf(item),
+        selectable: widget.toggleSelectable?.call(item));
   }
 
   @override

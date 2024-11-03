@@ -115,7 +115,7 @@ class _HomePageState extends State<HomePage> {
       _buildExampleElementWidget('selectable, radios in a list', () {
         _navigateToPage(const GroupedScrollViewWithToggleTestPage(
           grouped: false,
-            selectableTest: true,
+          selectableTest: true,
           toggleType: GroupedToggleType.radio,
           title: 'selectable, radios in a list',
         ));
@@ -124,7 +124,7 @@ class _HomePageState extends State<HomePage> {
         _navigateToPage(const GroupedScrollViewWithToggleTestPage(
           grouped: false,
           selectableTest: true,
-            crossAxisCount: 3,
+          crossAxisCount: 3,
           toggleType: GroupedToggleType.checkbox,
           title: 'selectable, Checkboxes in a list',
         ));

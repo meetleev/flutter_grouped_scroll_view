@@ -1,4 +1,4 @@
-## 0.2.2
+## 0.2.3
 * added 'toggleSelectable' to 'GroupedScrollViewWithToggle', used to to determine whether the item can be selected
 * added 'onTogglePressed' to 'GroupedToggleController', this callback responds when the item is pressed.
 
