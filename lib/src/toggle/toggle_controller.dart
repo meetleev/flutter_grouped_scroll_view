@@ -25,7 +25,7 @@ class GroupedToggleController extends ChangeNotifier {
       : _selectedIndexes = selectedIndexes.toSet();
 
   /// selected index on only single type
-  radioSelected(int index) {
+  void radioSelected(int index) {
     int first = _selectedIndexes.isNotEmpty ? _selectedIndexes.first : -1;
     if (index != first) {
       _selectedIndexes.clear();
@@ -35,14 +35,14 @@ class GroupedToggleController extends ChangeNotifier {
   }
 
   /// selected index
-  selected(int index) {
+  void selected(int index) {
     if (_selectedIndexes.contains(index)) return;
     _selectedIndexes.add(index);
     notifyListeners();
   }
 
   /// unselected index
-  unselected(int index) {
+  void unselected(int index) {
     if (!_selectedIndexes.contains(index)) return;
     _selectedIndexes.remove(index);
     notifyListeners();

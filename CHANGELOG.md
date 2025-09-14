@@ -1,3 +1,6 @@
+## 0.2.3+1
+* Fix static analysis warnings in Dart/Flutter code to comply with Lints rules.
+  
 ## 0.2.3
 * added 'toggleSelectable' to 'GroupedScrollViewWithToggle', used to to determine whether the item can be selected
 * added 'onTogglePressed' to 'GroupedToggleController', this callback responds when the item is pressed.
