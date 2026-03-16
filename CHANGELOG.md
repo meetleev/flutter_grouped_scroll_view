@@ -1,3 +1,6 @@
+## 0.2.4
+* added 'allowEmpty' to 'GroupedToggleStyle', used to determine whether to allow an empty selection (only takes effect in 'checkbox' mode). If set to false, at least one item must remain selected.
+
 ## 0.2.3+1
 * Fix static analysis warnings in Dart/Flutter code to comply with Lints rules.
   

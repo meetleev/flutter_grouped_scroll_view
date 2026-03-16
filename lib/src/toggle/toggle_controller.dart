@@ -1,6 +1,7 @@
 import 'package:flutter/widgets.dart';
 import 'toggle.dart';
 import 'toggle_style.dart';
+import 'toggle_type.dart';
 
 class GroupedToggleController extends ChangeNotifier {
   /// toggleStyle used to custom toggle.
@@ -44,7 +45,17 @@ class GroupedToggleController extends ChangeNotifier {
   /// unselected index
   void unselected(int index) {
     if (!_selectedIndexes.contains(index)) return;
-    _selectedIndexes.remove(index);
-    notifyListeners();
+    bool notify = false;
+    if (1 == _selectedIndexes.length &&
+        null != toggleStyle &&
+        GroupedToggleType.checkbox == toggleStyle!.toggleType) {
+      notify = toggleStyle!.allowEmpty;
+    } else {
+      notify = true;
+    }
+    if (notify) {
+      _selectedIndexes.remove(index);
+      notifyListeners();
+    }
   }
 }

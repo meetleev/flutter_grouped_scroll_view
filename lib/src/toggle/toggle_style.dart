@@ -14,9 +14,14 @@ class GroupedToggleStyle {
   /// Whether it is stacked, if it is stacked, the underlying elements are still displayed normally. Otherwise, they are not rendered.
   final bool isStacked;
 
+  /// Whether to allow an empty selection.
+  /// If set to [false], at least one item must remain selected, and the last active checkbox cannot be deselected.
+  final bool allowEmpty;
+
   const GroupedToggleStyle(
       {this.toggleType = GroupedToggleType.checkbox,
       this.absorbChildPointer = true,
       this.toggleAlignment = Alignment.center,
-      this.isStacked = true});
+      this.isStacked = true,
+      this.allowEmpty = true});
 }
